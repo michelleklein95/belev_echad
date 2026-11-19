@@ -77,6 +77,8 @@ a { color: inherit; }
 .social-link svg { flex: none; }
 .social-link:hover { border-color: var(--navy); background: var(--yellow-soft); transform: translateY(-1px); }
 .social-link:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+.social-link.whatsapp { color: #128c4b; border-color: #25d366; }
+.social-link.whatsapp:hover { background: #dcf8e6; border-color: #128c4b; }
 
 /* ---------- Hero ---------- */
 .hero {
@@ -534,6 +536,12 @@ input:focus, select:focus, textarea:focus {
   .job-row select { grid-column: 1; grid-row: 2; }
   .cd-label { font-size: 0.8rem; }
   .submit-row .btn, .cta-row .btn { width: 100%; }
+}
+@media (max-width: 380px) {
+  /* four icons + logo on the narrowest phones */
+  .logo img { height: 38px; }
+  .social { gap: 6px; }
+  .social-link { width: 38px; height: 38px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
