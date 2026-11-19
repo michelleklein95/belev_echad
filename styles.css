@@ -92,7 +92,7 @@ a { color: inherit; }
 }
 .hero h1 {
   margin: 0;
-  font-size: clamp(2rem, 5.2vw, 3.6rem);
+  font-size: clamp(1.9rem, 4.6vw, 3.2rem);
   font-weight: 900;
   line-height: 1.12;
   letter-spacing: -0.5px;
@@ -112,15 +112,8 @@ a { color: inherit; }
   height: 18px;
   margin: 6px 0 22px auto;
 }
-.hero h2 {
-  margin: 0;
-  font-size: clamp(1.8rem, 4.4vw, 3rem);
-  font-weight: 900;
-  line-height: 1.1;
-}
-.hero h1 + h2 { margin-top: 8px; }
 .hero .tagline {
-  margin: 6px 0 0;
+  margin: 10px 0 0;
   font-size: clamp(1.15rem, 2.6vw, 1.6rem);
   font-weight: 400;
 }
@@ -326,6 +319,14 @@ a { color: inherit; }
 .closing h2 { margin: 0; font-size: clamp(1.5rem, 3.6vw, 2.1rem); font-weight: 900; }
 .closing p { margin: 6px 0 0; font-size: 1.25rem; }
 .wave { display: block; width: 100%; height: auto; margin-top: 36px; }
+
+.site-footer {
+  padding: 16px;
+  background: var(--navy);
+  color: rgba(255, 255, 255, 0.85);
+  text-align: center;
+}
+.site-footer p { margin: 0 auto; max-width: 760px; font-size: 0.85rem; line-height: 1.6; text-wrap: balance; }
 
 /* ---------- Register page ---------- */
 .page-head { padding: 40px 0 10px; text-align: center; }
