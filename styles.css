@@ -179,6 +179,24 @@ a { color: inherit; }
 }
 .cd-label { display: block; margin-top: 6px; font-size: 0.95rem; opacity: 0.9; }
 .countdown-done { font-size: 1.6rem; font-weight: 800; color: var(--yellow); margin: 0; }
+.cd-details {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 32px;
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+.cd-detail {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+.cd-detail svg { flex: none; }
 
 /* ---------- Buttons ---------- */
 .cta-row {
@@ -243,32 +261,6 @@ a { color: inherit; }
 .bg-sky { background: var(--sky); }
 .bg-lilac { background: var(--lilac); }
 .bg-mint { background: var(--mint); }
-
-/* ---------- Details cards ---------- */
-.details {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-}
-.detail {
-  display: flex;
-  gap: 14px;
-  align-items: flex-start;
-  padding: 22px;
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-}
-.detail .d-icon {
-  flex: none;
-  width: 48px;
-  height: 48px;
-  border-radius: 14px;
-  display: grid;
-  place-items: center;
-}
-.detail h3 { margin: 0 0 2px; font-size: 1rem; font-weight: 500; color: var(--muted); }
-.detail p { margin: 0; font-size: 1.25rem; font-weight: 700; }
 
 /* ---------- Reps banner ---------- */
 .reps {
@@ -473,7 +465,6 @@ input:focus, select:focus, textarea:focus {
   .big-date { text-align: center; }
   .underline { margin-left: auto; margin-right: auto; }
   .features { grid-template-columns: repeat(2, 1fr); }
-  .detail { flex-direction: column; gap: 10px; }
   .reps { grid-template-columns: 1fr; text-align: center; }
   .reps .btn { justify-self: center; }
 }
@@ -481,8 +472,8 @@ input:focus, select:focus, textarea:focus {
   .topbar .container { justify-content: center; }
   .meta { justify-content: center; gap: 10px; font-size: 0.95rem; }
   .meta-divider { display: none; }
-  .details { grid-template-columns: 1fr; }
-  .detail { flex-direction: row; gap: 14px; }
+  .cd-details { flex-direction: column; align-items: center; gap: 8px; }
+  .cd-detail { font-size: 1rem; }
   .feature .icon { width: 86px; height: 86px; }
   .feature .icon svg { width: 44px; height: 44px; }
   .feature h3 { font-size: 1.05rem; }
