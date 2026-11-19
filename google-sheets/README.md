@@ -1,8 +1,16 @@
 # Registrations → Google Sheet
 
-Every verified submission of the `reps-registration` form on Netlify is forwarded
-to a Google Sheet by a Netlify **outgoing webhook** → a small **Google Apps Script** (`Code.gs`).
+When someone submits the registration form, `register.html` sends the answers straight
+to a small **Google Apps Script** (`Code.gs`) attached to the sheet (`SHEET_URL` in
+`register.html`), and also to Netlify Forms as a backup copy.
 Each registration becomes a row in the `הרשמות` tab, with Hebrew column titles.
+
+Note: because the page sends to the sheet directly, the `?key=` value is visible in the
+page source. It only stops casual misuse; if junk rows ever show up, change `SECRET` in
+the script and the key in `SHEET_URL` together.
+
+Step 5 below (Netlify webhook) is optional – it is not needed while the page sends directly,
+and form notifications may not be available on Netlify's free plan.
 
 ## One-time setup
 

@@ -246,14 +246,36 @@
   <script>
     /*
      * ===== Where submissions go =====
-     * Submissions are sent to Netlify Forms (form name: "reps-registration").
-     * They appear in the Netlify dashboard under the site's "Forms" tab.
+     * Every registration is sent to two places at once:
+     *  1. Google Sheet – via the Apps Script web app below (see google-sheets/README.md).
+     *  2. Netlify Forms (form name: "reps-registration") – a backup copy in the
+     *     Netlify dashboard under the "Forms" tab.
      * When the page is opened as a local file (not on Netlify), the form runs in
      * demo mode: it validates, shows the thank-you screen and logs the data to the
      * browser console – nothing is sent.
      */
     const NETLIFY_FORM_NAME = 'reps-registration';
+    const SHEET_URL = 'https://script.google.com/macros/s/AKfycbxJUaKuYcrJ2JgOoV1bqD3ORVek8WEDKYg3JRVMRTX7G3LaCGajkiVvdWgXv_DO0v8H/exec?key=7d626b23f50b428c54bd8342fcdd0748';
     const IS_LOCAL = location.protocol === 'file:';
+
+    function sendToNetlify(data, botField) {
+      const body = new URLSearchParams({ 'form-name': NETLIFY_FORM_NAME, 'bot-field': botField, ...data });
+      return fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: body.toString()
+      }).then(res => { if (!res.ok) throw new Error('Netlify: ' + res.status); });
+    }
+
+    function sendToSheet(data) {
+      // Apps Script does not answer CORS preflights, so send plain text without reading the reply.
+      return fetch(SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({ form_name: NETLIFY_FORM_NAME, created_at: new Date().toISOString(), data })
+      });
+    }
 
     const form = document.getElementById('reg-form');
     const jobsEl = document.getElementById('jobs');
@@ -401,17 +423,13 @@
         if (IS_LOCAL) {
           console.info('[demo mode] registration data (opened as a local file, nothing was sent):', data);
         } else {
-          const body = new URLSearchParams({
-            'form-name': NETLIFY_FORM_NAME,
-            'bot-field': form.querySelector('[name="bot-field"]').value,
-            ...data
-          });
-          const res = await fetch('/', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: body.toString()
-          });
-          if (!res.ok) throw new Error('Submit failed: ' + res.status);
+          const botField = form.querySelector('[name="bot-field"]').value;
+          const jobs = [sendToNetlify(data, botField)];
+          if (!botField) jobs.push(sendToSheet(data)); // spam trap filled → keep it out of the sheet
+          const results = await Promise.allSettled(jobs);
+          results.filter(r => r.status === 'rejected').forEach(r => console.error(r.reason));
+          // succeed if at least one destination got the registration
+          if (!results.some(r => r.status === 'fulfilled')) throw new Error('Submit failed');
         }
         form.hidden = true;
         document.getElementById('success').hidden = false;
