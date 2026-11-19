@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>שאלון לפני היריד | בלב אחד</title>
+  <meta name="description" content="מה יעזור לכם? שאלון קצר לחברי בלב אחד לפני יריד התעסוקה והלימודים, 24.12.26.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="container">
+      <a class="logo" href="index.html" aria-label="בלב אחד – חזרה לדף הראשי">
+        <span class="he">בלב<b>אחד</b></span>
+        <span class="sep" aria-hidden="true"></span>
+        <span class="en">belev<b>echad</b></span>
+      </a>
+      <a class="back-link" href="index.html">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+        חזרה לדף היריד
+      </a>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="page-head">
+      <span class="eyebrow">יריד תעסוקה ולימודים לחברי בלב אחד · 24.12.2026 · קסאנדו, פתח תקווה</span>
+      <h1>מה יעזור לכם?</h1>
+      <p>שאלון קצר לפני היריד. התשובות ישמשו אותנו לתכנון היריד. <b>אפשר לדלג על כל שאלה</b>, ואם תרצו שנחזור אליכם, השאירו שם וטלפון.</p>
+    </div>
+
+    <div class="form-wrap">
+      <form id="survey-form" name="members-survey" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+        <input type="hidden" name="form-name" value="members-survey">
+        <p hidden><label>Leave empty: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+
+        <!-- 1. About you -->
+        <section class="card">
+          <h2 class="card-title"><span class="step">1</span>קצת עליך</h2>
+
+          <div class="grid-2">
+            <div class="field">
+              <label class="label" for="fullName">שם מלא</label>
+              <input type="text" id="fullName" name="fullName" autocomplete="name">
+            </div>
+            <div class="field">
+              <label class="label" for="phone">טלפון</label>
+              <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel" pattern="^\+?[0-9\s\-]{9,15}$" placeholder="050-0000000">
+              <span class="error-msg">נא להזין מספר טלפון תקין</span>
+            </div>
+            <div class="field">
+              <label class="label" for="age">מה גילך?</label>
+              <input type="number" id="age" name="age" min="16" max="99" inputmode="numeric">
+              <span class="error-msg">נא להזין גיל בין 16 ל-99</span>
+            </div>
+          </div>
+
+          <div class="field">
+            <span class="label">מה מצבך המשפחתי?</span>
+            <div class="choices">
+              <label class="chip"><input type="radio" name="maritalStatus" value="רווק/ה"><span>רווק/ה</span></label>
+              <label class="chip"><input type="radio" name="maritalStatus" value="נשוי/אה"><span>נשוי/אה</span></label>
+              <label class="chip"><input type="radio" name="maritalStatus" value="בזוגיות"><span>בזוגיות</span></label>
+              <label class="chip"><input type="radio" name="maritalStatus" value="גרוש/ה"><span>גרוש/ה</span></label>
+              <label class="chip"><input type="radio" name="maritalStatus" value="אחר" data-other="maritalOther"><span>אחר</span></label>
+            </div>
+            <input type="text" id="maritalOther" name="maritalOther" class="other-input" placeholder="פרטו" aria-label="מצב משפחתי – אחר" hidden disabled>
+          </div>
+
+          <div class="grid-2">
+            <div class="field">
+              <span class="label">האם יש לך ילדים?</span>
+              <div class="choices">
+                <label class="chip"><input type="radio" name="hasChildren" value="כן" data-other="childrenCountField"><span>כן</span></label>
+                <label class="chip"><input type="radio" name="hasChildren" value="לא"><span>לא</span></label>
+              </div>
+            </div>
+            <div class="field" id="childrenCountField" hidden>
+              <label class="label" for="childrenCount">כמה ילדים?</label>
+              <input type="number" id="childrenCount" name="childrenCount" min="1" max="20" inputmode="numeric" disabled>
+              <span class="error-msg">נא להזין מספר בין 1 ל-20</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. Employment & studies -->
+        <section class="card">
+          <h2 class="card-title"><span class="step">2</span>תעסוקה ולימודים</h2>
+
+          <div class="field">
+            <span class="label">מה מצבך כיום בתעסוקה ובלימודים?</span>
+            <div class="choices">
+              <label class="chip"><input type="radio" name="currentStatus" value="עובד/ת"><span>עובד/ת</span></label>
+              <label class="chip"><input type="radio" name="currentStatus" value="לומד/ת"><span>לומד/ת</span></label>
+              <label class="chip"><input type="radio" name="currentStatus" value="גם עובד/ת וגם לומד/ת"><span>גם עובד/ת וגם לומד/ת</span></label>
+              <label class="chip"><input type="radio" name="currentStatus" value="מחפש/ת כיוון"><span>מחפש/ת כיוון</span></label>
+            </div>
+          </div>
+
+          <div class="field">
+            <span class="label">באיזה היקף משרה מתאים לך לעבוד?</span>
+            <div class="choices">
+              <label class="chip"><input type="radio" name="jobScope" value="25%"><span>25%</span></label>
+              <label class="chip"><input type="radio" name="jobScope" value="50%"><span>50%</span></label>
+              <label class="chip"><input type="radio" name="jobScope" value="75%"><span>75%</span></label>
+              <label class="chip"><input type="radio" name="jobScope" value="משרה מלאה"><span>משרה מלאה</span></label>
+              <label class="chip"><input type="radio" name="jobScope" value="משרת אם"><span>משרת אם</span></label>
+              <label class="chip"><input type="radio" name="jobScope" value="אחר" data-other="jobScopeOther"><span>אחר</span></label>
+            </div>
+            <input type="text" id="jobScopeOther" name="jobScopeOther" class="other-input" placeholder="פרטו" aria-label="היקף משרה – אחר" hidden disabled>
+          </div>
+        </section>
+
+        <!-- 3. The injury and the way forward -->
+        <section class="card">
+          <h2 class="card-title"><span class="step">3</span>הפציעה והדרך קדימה</h2>
+
+          <div class="field">
+            <span class="label">מה מאתגר אותך בהתמודדות עם הפציעה?</span>
+            <span class="hint">אפשר לסמן כמה תשובות</span>
+            <div class="choices">
+              <label class="chip"><input type="checkbox" name="challenges" value="חיי היום-יום"><span>חיי היום-יום</span></label>
+              <label class="chip"><input type="checkbox" name="challenges" value="ניידות"><span>ניידות</span></label>
+              <label class="chip"><input type="checkbox" name="challenges" value="כסף"><span>כסף</span></label>
+              <label class="chip"><input type="checkbox" name="challenges" value="עבודה"><span>עבודה</span></label>
+              <label class="chip"><input type="checkbox" name="challenges" value="לימודים"><span>לימודים</span></label>
+              <label class="chip"><input type="checkbox" name="challenges" value="בירוקרטיה"><span>בירוקרטיה</span></label>
+              <label class="chip"><input type="checkbox" name="challenges" value="חברה"><span>חברה</span></label>
+              <label class="chip"><input type="checkbox" name="challenges" value="אחר" data-other="challengesOther"><span>אחר</span></label>
+            </div>
+            <input type="text" id="challengesOther" name="challengesOther" class="other-input" placeholder="פרטו" aria-label="אתגר – אחר" hidden disabled>
+          </div>
+
+          <div class="field">
+            <label class="label" for="whatHelps">מה יכול לעזור לך להתמודד טוב יותר עם הפציעה?</label>
+            <textarea id="whatHelps" name="whatHelps"></textarea>
+          </div>
+
+          <div class="field">
+            <span class="label">האם לפני הפציעה היה לך רצון לממש משהו שחשוב לך? האם הרצון הזה עדיין קיים?</span>
+            <span class="hint">למשל בתחום העבודה, הלימודים, העסק או הזוגיות</span>
+            <div class="choices">
+              <label class="chip"><input type="radio" name="preInjuryWish" value="כן, הרצון עדיין קיים"><span>כן, הרצון עדיין קיים</span></label>
+              <label class="chip"><input type="radio" name="preInjuryWish" value="הרצון השתנה"><span>הרצון השתנה</span></label>
+              <label class="chip"><input type="radio" name="preInjuryWish" value="הרצון כבר חלף"><span>הרצון כבר חלף</span></label>
+              <label class="chip"><input type="radio" name="preInjuryWish" value="לא היה לי רצון כזה"><span>לא היה לי רצון כזה</span></label>
+            </div>
+          </div>
+
+          <div class="field">
+            <span class="label">האם חסר לך משהו כדי לממש את הרצון הזה?</span>
+            <div class="choices">
+              <label class="chip"><input type="radio" name="missingSomething" value="כן"><span>כן</span></label>
+              <label class="chip"><input type="radio" name="missingSomething" value="לא"><span>לא</span></label>
+              <label class="chip"><input type="radio" name="missingSomething" value="עדיין לא ברור לי"><span>עדיין לא ברור לי</span></label>
+            </div>
+          </div>
+
+          <div class="field">
+            <span class="label">אילו אמצעים יכולים לעזור לך לממש את הרצון הזה?</span>
+            <span class="hint">אפשר לסמן כמה תשובות</span>
+            <div class="choices">
+              <label class="chip"><input type="checkbox" name="helpfulMeans" value="הכשרה והכוונה"><span>הכשרה והכוונה</span></label>
+              <label class="chip"><input type="checkbox" name="helpfulMeans" value="מימון"><span>מימון</span></label>
+              <label class="chip"><input type="checkbox" name="helpfulMeans" value="היכרות עם מעסיקים"><span>היכרות עם מעסיקים</span></label>
+              <label class="chip"><input type="checkbox" name="helpfulMeans" value="ליווי אישי"><span>ליווי אישי</span></label>
+              <label class="chip"><input type="checkbox" name="helpfulMeans" value="נגישות"><span>נגישות</span></label>
+              <label class="chip"><input type="checkbox" name="helpfulMeans" value="אחר" data-other="helpfulMeansOther"><span>אחר</span></label>
+            </div>
+            <input type="text" id="helpfulMeansOther" name="helpfulMeansOther" class="other-input" placeholder="פרטו" aria-label="אמצעים – אחר" hidden disabled>
+          </div>
+
+          <div class="field">
+            <label class="label" for="helpfulGift">איזו מתנה הייתה עוזרת לך להתקדם?</label>
+            <input type="text" id="helpfulGift" name="helpfulGift">
+          </div>
+        </section>
+
+        <!-- 4. The fair -->
+        <section class="card">
+          <h2 class="card-title"><span class="step">4</span>היריד</h2>
+
+          <div class="field">
+            <span class="label">מה הכי מעניין אותך ביריד?</span>
+            <span class="hint">אפשר לסמן כמה תשובות</span>
+            <div class="choices">
+              <label class="chip"><input type="checkbox" name="fairInterests" value="חברות מגייסות"><span>חברות מגייסות</span></label>
+              <label class="chip"><input type="checkbox" name="fairInterests" value="מוסדות לימוד"><span>מוסדות לימוד</span></label>
+              <label class="chip"><input type="checkbox" name="fairInterests" value="ייעוץ וליווי"><span>ייעוץ וליווי</span></label>
+              <label class="chip"><input type="checkbox" name="fairInterests" value="שוק עסקים של חברי העמותה"><span>שוק עסקים של חברי העמותה</span></label>
+              <label class="chip"><input type="checkbox" name="fairInterests" value="הופעה ואווירה"><span>הופעה ואווירה</span></label>
+              <label class="chip"><input type="checkbox" name="fairInterests" value="אחר" data-other="fairInterestsOther"><span>אחר</span></label>
+            </div>
+            <input type="text" id="fairInterestsOther" name="fairInterestsOther" class="other-input" placeholder="פרטו" aria-label="מה מעניין ביריד – אחר" hidden disabled>
+          </div>
+
+          <div class="field">
+            <label class="label" for="artist">איזה אמן/ית היית רוצה לראות בהופעה?</label>
+            <input type="text" id="artist" name="artist">
+          </div>
+
+          <div class="field">
+            <label class="label" for="anythingElse">עוד משהו שחשוב לך שנדע?</label>
+            <textarea id="anythingElse" name="anythingElse"></textarea>
+          </div>
+        </section>
+
+        <div class="submit-row">
+          <p class="form-error" id="formError" role="alert"></p>
+          <button type="submit" class="btn btn-primary" id="submitBtn">שליחת השאלון</button>
+        </div>
+      </form>
+
+      <section class="card success" id="success" hidden>
+        <div class="check">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#14224b" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+        </div>
+        <h2>תודה!</h2>
+        <p>התשובות שלך יעזרו לנו לתכנן את היריד. נתראה ב-24.12.26 באולם קסאנדו, פתח תקווה.</p>
+        <a class="btn btn-dark" href="index.html">חזרה לדף היריד</a>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    /*
+     * Submissions go to Netlify Forms (form name: "members-survey").
+     * Opened as a local file, the form runs in demo mode and only logs to the console.
+     */
+    const NETLIFY_FORM_NAME = 'members-survey';
+    const IS_LOCAL = location.protocol === 'file:';
+
+    const form = document.getElementById('survey-form');
+    const errBox = document.getElementById('formError');
+
+    /* ---------- "Other" / follow-up fields ---------- */
+    // An option with data-other="<id>" reveals that element while it is selected.
+    function syncFollowUps() {
+      form.querySelectorAll('input[data-other]').forEach(opt => {
+        const target = document.getElementById(opt.dataset.other);
+        const show = opt.checked;
+        target.hidden = !show;
+        // disabled inputs are left out of the submission
+        const inputs = target.matches('input, textarea') ? [target] : target.querySelectorAll('input, textarea');
+        inputs.forEach(i => { i.disabled = !show; });
+      });
+    }
+    form.addEventListener('change', e => {
+      if (e.target.matches('input[type=radio], input[type=checkbox]')) {
+        syncFollowUps();
+        const opt = e.target;
+        if (opt.dataset.other && opt.checked) {
+          const t = document.getElementById(opt.dataset.other);
+          (t.matches('input') ? t : t.querySelector('input'))?.focus();
+        }
+      }
+    });
+    syncFollowUps();
+
+    /* ---------- Validation (all questions are optional) ---------- */
+    function validate() {
+      let firstBad = null;
+      form.querySelectorAll('.field').forEach(f => f.classList.remove('invalid'));
+      form.querySelectorAll('input[type=text], input[type=tel], input[type=number], textarea').forEach(el => {
+        if (el.disabled) return;
+        el.value = el.value.trim();
+        if (!el.checkValidity()) {
+          el.closest('.field').classList.add('invalid');
+          if (!firstBad) firstBad = el;
+        }
+      });
+      return firstBad;
+    }
+    form.addEventListener('input', e => {
+      const f = e.target.closest('.field');
+      if (f && f.classList.contains('invalid') && e.target.checkValidity()) f.classList.remove('invalid');
+    });
+
+    /* ---------- Collect: one value per question, multi-select joined ---------- */
+    function collect() {
+      const fd = new FormData(form);
+      const data = {};
+      for (const key of new Set(fd.keys())) {
+        if (key === 'form-name' || key === 'bot-field') continue;
+        const val = fd.getAll(key).map(v => String(v).trim()).filter(Boolean).join(', ');
+        if (val) data[key] = val;
+      }
+      return data;
+    }
+
+    function showError(msg, el) {
+      errBox.textContent = msg;
+      errBox.style.display = 'block';
+      if (el) {
+        el.closest('.field').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(() => el.focus({ preventScroll: true }), 350);
+      }
+    }
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      const firstBad = validate();
+      if (firstBad) return showError('יש שדה שלא מולא נכון – סימנו אותו באדום.', firstBad);
+
+      const data = collect();
+      if (!Object.keys(data).length) return showError('נא לענות לפחות על שאלה אחת.');
+      errBox.style.display = 'none';
+
+      const btn = document.getElementById('submitBtn');
+      btn.disabled = true;
+      btn.textContent = 'שולחים...';
+
+      try {
+        if (IS_LOCAL) {
+          console.info('[demo mode] survey data (opened as a local file, nothing was sent):', data);
+        } else {
+          const body = new URLSearchParams({
+            'form-name': NETLIFY_FORM_NAME,
+            'bot-field': form.querySelector('[name="bot-field"]').value,
+            ...data
+          });
+          const res = await fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: body.toString()
+          });
+          if (!res.ok) throw new Error('Submit failed: ' + res.status);
+        }
+        form.hidden = true;
+        document.getElementById('success').hidden = false;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } catch (err) {
+        console.error(err);
+        showError('אירעה שגיאה בשליחה. נא לבדוק את החיבור לאינטרנט ולנסות שוב.');
+        btn.disabled = false;
+        btn.textContent = 'שליחת השאלון';
+      }
+    });
+  </script>
+</body>
+</html>

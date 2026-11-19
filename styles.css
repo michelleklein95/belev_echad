@@ -278,6 +278,7 @@ a { color: inherit; }
   background: var(--yellow);
   box-shadow: var(--shadow);
 }
+.reps.alt { background: var(--sky); }
 .reps h2 { margin: 0 0 6px; font-size: clamp(1.4rem, 3.2vw, 1.9rem); font-weight: 900; }
 .reps p { margin: 0; font-size: 1.08rem; }
 
@@ -429,6 +430,8 @@ input:focus, select:focus, textarea:focus {
   padding: 14px 16px; border: 1px solid var(--line); border-radius: 14px; margin-bottom: 10px;
 }
 .yn-row .label { font-weight: 500; }
+
+.other-input { max-width: 360px; margin-top: 4px; }
 
 /* jobs list */
 .job-row { display: grid; grid-template-columns: 1fr 170px auto; gap: 10px; margin-bottom: 10px; align-items: start; }
