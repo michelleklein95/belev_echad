@@ -1,2 +1,5 @@
 # Private copy of the Apps Script with the real secret key
 google-sheets/Code.local.gs
+
+# QR code for printing (kept local, not part of the website)
+belev-echad-qr.png
