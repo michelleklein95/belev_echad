@@ -42,19 +42,9 @@ a { color: inherit; }
 }
 
 /* ---------- Logo ---------- */
-.logo {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-  font-weight: 700;
-  line-height: 0.95;
-}
-.logo .he { color: var(--blue); font-size: 1.05rem; text-align: center; }
-.logo .he b { display: block; color: var(--navy); }
-.logo .sep { width: 2px; align-self: stretch; background: var(--navy); }
-.logo .en { font-size: 1.15rem; color: var(--navy); direction: ltr; text-align: left; font-weight: 500; }
-.logo .en b { display: block; color: var(--blue); font-weight: 500; }
+.logo { display: inline-flex; align-items: center; }
+.logo img { display: block; height: 50px; width: auto; }
+@media (max-width: 600px) { .logo img { height: 44px; } }
 
 /* ---------- Top info bar ---------- */
 .topbar {
