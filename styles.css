@@ -267,20 +267,60 @@ a { color: inherit; }
 .bg-lilac { background: var(--lilac); }
 .bg-mint { background: var(--mint); }
 
-/* ---------- Reps banner ---------- */
-.reps {
+/* ---------- Registration cards ---------- */
+.section-sub { margin: -16px 0 28px; text-align: center; color: var(--muted); font-size: 1.1rem; }
+.reg-cards {
   display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: center;
-  gap: 20px;
-  padding: 30px;
-  border-radius: 24px;
-  background: var(--yellow);
-  box-shadow: var(--shadow);
+  grid-template-columns: 1.15fr 1fr 1fr;
+  gap: 18px;
+  align-items: stretch;
 }
-.reps h2 { margin: 0 0 6px; font-size: clamp(1.4rem, 3.2vw, 1.9rem); font-weight: 900; }
-.reps p { margin: 0; font-size: 1.08rem; }
+.reg-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 26px 24px;
+  background: var(--card);
+  border: 1.5px solid var(--line);
+  border-radius: 22px;
+  color: var(--navy);
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+.reg-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--navy); }
+.reg-card:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+.reg-card.featured { background: var(--yellow); border-color: var(--yellow); box-shadow: var(--shadow); }
+.reg-card h3 { margin: 4px 0 0; font-size: 1.35rem; font-weight: 800; line-height: 1.25; }
+.reg-card p { margin: 0; font-size: 1.02rem; flex: 1; }
+.reg-card .btn { margin-top: 8px; padding: 11px 20px; font-size: 1rem; }
+.reg-card .btn:hover { transform: none; box-shadow: none; }
+.reg-icon { width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; }
+.reg-card.featured .reg-icon { background: #fff; }
+.reg-badge {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--navy);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
 
+/* ---------- Form extras ---------- */
+.other-input { max-width: 380px; margin-top: 4px; }
+.sub-fields > .field {
+  margin-top: -4px;
+  padding-inline-start: 14px;
+  border-inline-start: 3px solid var(--yellow-soft);
+}
+.section-note { margin: 34px 0 16px; text-align: center; }
+.section-note h2 { margin: 0 0 4px; font-size: clamp(1.4rem, 3.4vw, 1.8rem); font-weight: 900; }
+.section-note p { margin: 0; color: var(--muted); font-size: 1.05rem; }
+.privacy-note { margin: 6px 0 16px; text-align: center; color: var(--muted); font-size: 0.95rem; }
 /* ---------- Footer ---------- */
 .closing { text-align: center; padding: 30px 0 0; }
 .closing h2 { margin: 0; font-size: clamp(1.5rem, 3.6vw, 2.1rem); font-weight: 900; }
@@ -470,8 +510,8 @@ input:focus, select:focus, textarea:focus {
   .big-date { text-align: center; }
   .underline { margin-left: auto; margin-right: auto; }
   .features { grid-template-columns: repeat(2, 1fr); }
-  .reps { grid-template-columns: 1fr; text-align: center; }
-  .reps .btn { justify-self: center; }
+  .reg-cards { grid-template-columns: 1fr 1fr; }
+  .reg-card.featured { grid-column: 1 / -1; }
 }
 @media (max-width: 600px) {
   .topbar .container { flex-wrap: nowrap; }
@@ -483,7 +523,8 @@ input:focus, select:focus, textarea:focus {
   .feature .icon { width: 86px; height: 86px; }
   .feature .icon svg { width: 44px; height: 44px; }
   .feature h3 { font-size: 1.05rem; }
-  .grid-2, .type-cards { grid-template-columns: 1fr; }
+  .grid-2, .type-cards, .reg-cards { grid-template-columns: 1fr; }
+  .reg-card { padding: 22px 18px; }
   .card { padding: 20px 16px; }
   .job-row { grid-template-columns: 1fr auto; }
   .job-row input { grid-column: 1; grid-row: 1; }

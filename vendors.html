@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>הרשמה לדוכני מכירה | בלב אחד</title>
+  <meta name="description" content="הרשמה לדוכן מכירה ביריד התעסוקה והלימודים של עמותת בלב אחד, 24.12.26.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="container">
+      <a class="logo" href="index.html" aria-label="בלב אחד – חזרה לדף הראשי">
+        <img src="assets/logo.png" alt="בלב אחד – belev echad" width="194" height="76">
+      </a>
+      <a class="back-link" href="index.html">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+        חזרה לדף היריד
+      </a>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="page-head">
+      <span class="eyebrow">יריד תעסוקה ולימודים · 24.12.26 · 10:00 · אולם קסאנדו, פתח תקווה</span>
+      <h1>הרשמה לדוכני מכירה</h1>
+      <p>רוצים למכור ולהציג את העסק שלכם ביריד? מלאו את הפרטים ונדאג שהדוכן שלכם יהיה מושלם. שדות המסומנים ב-<span style="color:var(--danger)">*</span> הם שדות חובה.</p>
+    </div>
+
+    <div class="form-wrap">
+      <form id="vendors-form" name="vendors-registration" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+        <input type="hidden" name="form-name" value="vendors-registration">
+        <p hidden><label>Leave empty: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+
+        <!-- 1. Business & contact -->
+        <section class="card">
+          <h2 class="card-title"><span class="step">1</span>פרטי העסק ואיש/אשת הקשר</h2>
+          <div class="grid-2">
+            <div class="field" data-label="שם מלא">
+              <label class="label" for="fullName">שם מלא <span class="req">*</span></label>
+              <input type="text" id="fullName" name="fullName" required autocomplete="name">
+              <span class="error-msg">שדה חובה</span>
+            </div>
+            <div class="field" data-label="שם העסק / המותג">
+              <label class="label" for="businessName">שם העסק / המותג <span class="req">*</span></label>
+              <input type="text" id="businessName" name="businessName" required autocomplete="organization">
+              <span class="error-msg">שדה חובה</span>
+            </div>
+            <div class="field" data-label="טלפון נייד (וואטסאפ)">
+              <label class="label" for="phone">טלפון נייד (וואטסאפ) <span class="req">*</span></label>
+              <input type="tel" id="phone" name="phone" required autocomplete="tel" inputmode="tel" pattern="^\+?[0-9\s\-]{9,15}$" placeholder="050-0000000">
+              <span class="error-msg">נא להזין מספר טלפון תקין</span>
+            </div>
+            <div class="field" data-label="אימייל">
+              <label class="label" for="email">אימייל <span class="req">*</span></label>
+              <input type="email" id="email" name="email" required autocomplete="email" placeholder="name@example.com">
+              <span class="error-msg">נא להזין כתובת אימייל תקינה</span>
+            </div>
+            <div class="field" data-label="אזור פעילות">
+              <label class="label" for="region">איפה העסק ממוקם / אזור הפעילות <span class="req">*</span></label>
+              <select id="region" name="region" required>
+                <option value="">בחרו אזור</option>
+                <option>צפון</option>
+                <option>חיפה והקריות</option>
+                <option>שרון</option>
+                <option>מרכז / גוש דן</option>
+                <option>שפלה</option>
+                <option>ירושלים והסביבה</option>
+                <option>יהודה ושומרון</option>
+                <option>דרום</option>
+                <option>ארצי / אונליין</option>
+              </select>
+              <span class="error-msg">נא לבחור אזור</span>
+            </div>
+            <div class="field" data-label="עיר / יישוב">
+              <label class="label" for="city">עיר / יישוב</label>
+              <input type="text" id="city" name="city" autocomplete="address-level2">
+            </div>
+          </div>
+
+          <div class="field" data-label="קישור לאתר / רשתות">
+            <label class="label" for="link">קישור לאתר / אינסטגרם / פייסבוק</label>
+            <span class="hint">כדי שנוכל לפרגן ולפרסם אתכם לפני היריד</span>
+            <input type="text" id="link" name="link" inputmode="url" dir="ltr" placeholder="instagram.com/your-business">
+          </div>
+
+          <div class="field" data-label="בעל/ת העסק חבר/ת עמותה">
+            <div class="yn-row">
+              <span class="label">האם בעל/ת העסק חבר/ת עמותת בלב אחד?</span>
+              <div class="choices">
+                <label class="chip"><input type="radio" name="isMember" value="כן"><span>כן</span></label>
+                <label class="chip"><input type="radio" name="isMember" value="לא"><span>לא</span></label>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. Products -->
+        <section class="card">
+          <h2 class="card-title"><span class="step">2</span>על המוצרים והדוכן</h2>
+
+          <div class="field" data-label="תחום העסק" data-required-group>
+            <span class="label">תחום העסק <span class="req">*</span></span>
+            <span class="hint">אפשר לסמן כמה תשובות</span>
+            <div class="choices">
+              <label class="chip"><input type="checkbox" name="category" value="אוכל ומאפים"><span>אוכל ומאפים</span></label>
+              <label class="chip"><input type="checkbox" name="category" value="תכשיטים ואקססוריז"><span>תכשיטים ואקססוריז</span></label>
+              <label class="chip"><input type="checkbox" name="category" value="אופנה וטקסטיל"><span>אופנה וטקסטיל</span></label>
+              <label class="chip"><input type="checkbox" name="category" value="עיצוב הבית"><span>עיצוב הבית</span></label>
+              <label class="chip"><input type="checkbox" name="category" value="אמנות ויצירה"><span>אמנות ויצירה</span></label>
+              <label class="chip"><input type="checkbox" name="category" value="טיפוח וקוסמטיקה"><span>טיפוח וקוסמטיקה</span></label>
+              <label class="chip"><input type="checkbox" name="category" value="אחר" data-show="categoryOther"><span>אחר</span></label>
+            </div>
+            <input type="text" id="categoryOther" name="categoryOther" class="other-input" data-label="תחום העסק – אחר" placeholder="איזה תחום?" aria-label="תחום העסק – אחר" hidden>
+            <span class="error-msg">נא לבחור לפחות תחום אחד</span>
+          </div>
+
+          <div class="field" data-label="מה יימכר בדוכן">
+            <label class="label" for="products">מה תציעו למכירה בדוכן? <span class="req">*</span></label>
+            <textarea id="products" name="products" required placeholder="תיאור קצר של המוצרים או השירותים שלכם"></textarea>
+            <span class="error-msg">שדה חובה</span>
+          </div>
+
+          <div class="field" data-label="דוכן מזון / שתייה">
+            <div class="yn-row">
+              <span class="label">האם מדובר בדוכן מזון או שתייה? <span class="req">*</span></span>
+              <div class="choices">
+                <label class="chip"><input type="radio" name="isFood" value="כן" data-show="foodDetails" required><span>כן</span></label>
+                <label class="chip"><input type="radio" name="isFood" value="לא"><span>לא</span></label>
+              </div>
+            </div>
+            <span class="error-msg">נא לבחור תשובה</span>
+          </div>
+
+          <div class="sub-fields" id="foodDetails" hidden>
+            <div class="field" data-label="תעודת כשרות">
+              <span class="label">האם יש תעודת כשרות? <span class="req">*</span></span>
+              <div class="choices">
+                <label class="chip"><input type="radio" name="kosher" value="כן" required><span>כן</span></label>
+                <label class="chip"><input type="radio" name="kosher" value="לא"><span>לא</span></label>
+                <label class="chip"><input type="radio" name="kosher" value="בתהליך"><span>בתהליך</span></label>
+              </div>
+              <span class="error-msg">נא לבחור תשובה</span>
+            </div>
+            <div class="field" data-label="קירור / חימום">
+              <span class="label">האם נדרש קירור או חימום?</span>
+              <div class="choices">
+                <label class="chip"><input type="checkbox" name="foodTemp" value="קירור"><span>קירור</span></label>
+                <label class="chip"><input type="checkbox" name="foodTemp" value="חימום"><span>חימום</span></label>
+                <label class="chip"><input type="checkbox" name="foodTemp" value="לא נדרש"><span>לא נדרש</span></label>
+              </div>
+            </div>
+          </div>
+
+          <div class="field" data-label="הטבה לחברי העמותה">
+            <label class="label" for="memberOffer">תרצו להציע הטבה או הנחה מיוחדת לחברי העמותה ביריד?</label>
+            <input type="text" id="memberOffer" name="memberOffer" placeholder="לדוגמה: 15% הנחה לחברי בלב אחד">
+          </div>
+        </section>
+
+        <!-- 3. Team & logistics -->
+        <section class="card">
+          <h2 class="card-title"><span class="step">3</span>צוות ולוגיסטיקה בדוכן</h2>
+
+          <div class="field" data-label="מספר נציגים בדוכן">
+            <span class="label">כמה נציגים יפעילו את הדוכן ביום היריד? <span class="req">*</span></span>
+            <div class="choices">
+              <label class="chip"><input type="radio" name="staffCount" value="1" required><span>1</span></label>
+              <label class="chip"><input type="radio" name="staffCount" value="2"><span>2</span></label>
+              <label class="chip"><input type="radio" name="staffCount" value="3 ומעלה"><span>3 ומעלה</span></label>
+            </div>
+            <span class="error-msg">נא לבחור תשובה</span>
+          </div>
+
+          <div class="field" data-label="צרכים מהמארגנים">
+            <span class="label">מה אתם צריכים מאיתנו לטובת הדוכן?</span>
+            <span class="hint">אפשר לסמן כמה אפשרויות</span>
+            <div class="choices">
+              <label class="chip"><input type="checkbox" name="needs" value="שולחן תצוגה"><span>שולחן תצוגה</span></label>
+              <label class="chip"><input type="checkbox" name="needs" value="מפה לשולחן"><span>מפה לשולחן</span></label>
+              <label class="chip"><input type="checkbox" name="needs" value="כיסאות" data-show="chairsField"><span>כיסאות</span></label>
+              <label class="chip"><input type="checkbox" name="needs" value="נקודת חשמל" data-show="powerField"><span>נקודת חשמל</span></label>
+              <label class="chip"><input type="checkbox" name="needs" value="מקום נוסף לצד השולחן" data-show="spaceField"><span>מקום נוסף לצד השולחן</span></label>
+              <label class="chip"><input type="checkbox" name="needs" value="אחר" data-show="needsOther"><span>אחר</span></label>
+            </div>
+          </div>
+
+          <div class="sub-fields">
+            <div class="field" id="chairsField" data-label="כמות כיסאות" hidden>
+              <label class="label" for="chairs">כמה כיסאות?</label>
+              <div>
+                <div class="stepper">
+                  <button type="button" data-step="1" aria-label="הוספת כיסא">+</button>
+                  <input type="number" id="chairs" name="chairs" value="2" min="1" max="10" inputmode="numeric">
+                  <button type="button" data-step="-1" aria-label="הפחתת כיסא">−</button>
+                </div>
+              </div>
+              <span class="error-msg">נא להזין מספר בין 1 ל-10</span>
+            </div>
+            <div class="field" id="powerField" data-label="ציוד שדורש חשמל" hidden>
+              <label class="label" for="powerFor">לאיזה ציוד נדרש חשמל?</label>
+              <input type="text" id="powerFor" name="powerFor" placeholder="לדוגמה: קופה, תאורה, מכונת קפה">
+            </div>
+            <div class="field" id="spaceField" data-label="מקום נוסף – למה" hidden>
+              <label class="label" for="extraSpace">למה נדרש המקום הנוסף?</label>
+              <input type="text" id="extraSpace" name="extraSpace" placeholder="לדוגמה: מתלה בגדים, סטנד רצפתי">
+            </div>
+            <div class="field" id="needsOther" data-label="צרכים – אחר" hidden>
+              <label class="label" for="needsOtherText">מה עוד תצטרכו?</label>
+              <input type="text" id="needsOtherText" name="needsOtherText">
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. Branding & display -->
+        <section class="card">
+          <h2 class="card-title"><span class="step">4</span>מיתוג, נראות ותצוגה</h2>
+
+          <div class="field" data-label="מיתוג וחומרי שיווק">
+            <span class="label">מה יש לכם להציג בדוכן?</span>
+            <span class="hint">רולאפ, שלט ממותג, כרטיסי ביקור, פליירים, אריזות – אפשר לסמן כמה תשובות</span>
+            <div class="choices">
+              <label class="chip"><input type="checkbox" name="branding" value="רולאפ / שלט ממותג"><span>רולאפ / שלט ממותג</span></label>
+              <label class="chip"><input type="checkbox" name="branding" value="חומר שיווקי וכרטיסי ביקור"><span>חומר שיווקי וכרטיסי ביקור</span></label>
+              <label class="chip"><input type="checkbox" name="branding" value="אין כרגע – נשמח לשלט שם בסיסי מהמארגנים"><span>אין לנו כרגע – נשמח לשלט שם בסיסי מהמארגנים</span></label>
+            </div>
+          </div>
+
+          <div class="field" data-label="מתקני תצוגה משלכם">
+            <div class="yn-row">
+              <span class="label">האם אתם מביאים מתקני תצוגה משלכם?</span>
+              <div class="choices">
+                <label class="chip"><input type="radio" name="ownDisplay" value="כן" data-show="ownDisplayDetails"><span>כן</span></label>
+                <label class="chip"><input type="radio" name="ownDisplay" value="לא"><span>לא</span></label>
+              </div>
+            </div>
+            <input type="text" id="ownDisplayDetails" name="ownDisplayDetails" class="other-input" data-label="פירוט מתקני תצוגה" placeholder="למשל: מדפים, מתלים, מפה ממותגת" aria-label="פירוט מתקני התצוגה" hidden>
+          </div>
+        </section>
+
+        <!-- 5. Preparation & accessibility -->
+        <section class="card">
+          <h2 class="card-title"><span class="step">5</span>היערכות ונגישות</h2>
+
+          <div class="field" data-label="עזרה בפריקה / נגישות">
+            <div class="yn-row">
+              <span class="label">תזדקקו לעזרה בפריקה והעמסה של הציוד, או להתאמות נגישות?</span>
+              <div class="choices">
+                <label class="chip"><input type="radio" name="needHelp" value="כן" data-show="helpDetails"><span>כן</span></label>
+                <label class="chip"><input type="radio" name="needHelp" value="לא"><span>לא</span></label>
+              </div>
+            </div>
+            <input type="text" id="helpDetails" name="helpDetails" class="other-input" data-label="פירוט עזרה / נגישות" placeholder="נשמח שתפרטו כדי שנדאג לכם" aria-label="פירוט עזרה או נגישות" hidden>
+          </div>
+
+          <div class="field" data-label="עוד משהו">
+            <label class="label" for="notes">עוד משהו שחשוב שנדע כדי שהדוכן שלכם יהיה מושלם?</label>
+            <textarea id="notes" name="notes"></textarea>
+          </div>
+        </section>
+
+        <div class="submit-row">
+          <p class="form-error" role="alert"></p>
+          <button type="submit" class="btn btn-primary">שליחת ההרשמה</button>
+        </div>
+      </form>
+
+      <section class="card success" id="success" hidden>
+        <div class="check">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#14224b" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+        </div>
+        <h2>תודה, ההרשמה התקבלה!</h2>
+        <p>נחזור אליכם בהקדם לתיאום פרטי הדוכן. נתראה ביריד ב-24.12.26 באולם קסאנדו, פתח תקווה.</p>
+        <a class="btn btn-dark" href="index.html">חזרה לדף היריד</a>
+      </section>
+    </div>
+  </main>
+
+  <script src="forms.js"></script>
+  <script>
+    BelevForms.init({ form: '#vendors-form', formName: 'vendors-registration', netlify: true });
+  </script>
+</body>
+</html>

@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>הרשמת חברי העמותה | בלב אחד</title>
+  <meta name="description" content="הרשמה ושאלון קצר לחברי עמותת בלב אחד לקראת יריד התעסוקה והלימודים, 24.12.26.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="container">
+      <a class="logo" href="index.html" aria-label="בלב אחד – חזרה לדף הראשי">
+        <img src="assets/logo.png" alt="בלב אחד – belev echad" width="194" height="76">
+      </a>
+      <a class="back-link" href="index.html">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+        חזרה לדף היריד
+      </a>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="page-head">
+      <span class="eyebrow">יריד תעסוקה ולימודים · 24.12.26 · 10:00 · אולם קסאנדו, פתח תקווה</span>
+      <h1>הרשמה ליריד – חברי העמותה</h1>
+      <p>נשמח לראות אתכם! השאירו פרטים כדי להירשם, ואם תרצו – ענו על שאלון קצר שיעזור לנו להתאים את היריד בדיוק בשבילכם. שדות המסומנים ב-<span style="color:var(--danger)">*</span> הם שדות חובה.</p>
+    </div>
+
+    <div class="form-wrap">
+      <form id="members-form" name="members-registration" novalidate>
+        <p hidden><label>Leave empty: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+
+        <!-- 1. Contact details (required) -->
+        <section class="card">
+          <h2 class="card-title"><span class="step">1</span>פרטים להרשמה</h2>
+          <div class="grid-2">
+            <div class="field" data-label="שם מלא">
+              <label class="label" for="fullName">שם מלא <span class="req">*</span></label>
+              <input type="text" id="fullName" name="fullName" required autocomplete="name">
+              <span class="error-msg">שדה חובה</span>
+            </div>
+            <div class="field" data-label="טלפון">
+              <label class="label" for="phone">טלפון <span class="req">*</span></label>
+              <input type="tel" id="phone" name="phone" required autocomplete="tel" inputmode="tel" pattern="^\+?[0-9\s\-]{9,15}$" placeholder="050-0000000">
+              <span class="error-msg">נא להזין מספר טלפון תקין</span>
+            </div>
+            <div class="field" data-label="אימייל">
+              <label class="label" for="email">אימייל <span class="req">*</span></label>
+              <input type="email" id="email" name="email" required autocomplete="email" placeholder="name@example.com">
+              <span class="error-msg">נא להזין כתובת אימייל תקינה</span>
+            </div>
+            <div class="field" data-label="עיר מגורים">
+              <label class="label" for="city">עיר מגורים</label>
+              <input type="text" id="city" name="city" autocomplete="address-level2">
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. Coming to the fair -->
+        <section class="card">
+          <h2 class="card-title"><span class="step">2</span>ההגעה ליריד</h2>
+
+          <div class="field" data-label="מספר מלווים">
+            <label class="label" for="companions">כמה מלווים יגיעו איתך?</label>
+            <div>
+              <div class="stepper">
+                <button type="button" data-step="1" aria-label="הוספת מלווה">+</button>
+                <input type="number" id="companions" name="companions" value="0" min="0" max="10" inputmode="numeric">
+                <button type="button" data-step="-1" aria-label="הפחתת מלווה">−</button>
+              </div>
+            </div>
+            <span class="error-msg">נא להזין מספר בין 0 ל-10</span>
+          </div>
+
+          <div class="field" data-label="התאמות נגישות">
+            <span class="label">האם תזדקק/י להתאמות נגישות ביריד?</span>
+            <span class="hint">אפשר לסמן כמה תשובות – כדי שנדאג שיהיה לך נוח</span>
+            <div class="choices">
+              <label class="chip"><input type="checkbox" name="accessibility" value="חניית נכים"><span>חניית נכים</span></label>
+              <label class="chip"><input type="checkbox" name="accessibility" value="גישה לכיסא גלגלים"><span>גישה לכיסא גלגלים</span></label>
+              <label class="chip"><input type="checkbox" name="accessibility" value="מקום ישיבה"><span>מקום ישיבה</span></label>
+              <label class="chip"><input type="checkbox" name="accessibility" value="ליווי צמוד"><span>ליווי צמוד</span></label>
+              <label class="chip"><input type="checkbox" name="accessibility" value="אחר" data-show="accessibilityOther"><span>אחר</span></label>
+              <label class="chip"><input type="checkbox" name="accessibility" value="לא נדרש"><span>לא נדרש</span></label>
+            </div>
+            <input type="text" id="accessibilityOther" name="accessibilityOther" class="other-input" data-label="נגישות – אחר" placeholder="פרטו" aria-label="התאמות נגישות – אחר" hidden>
+          </div>
+        </section>
+
+        <div class="section-note">
+          <h2>שאלון קצר לפני היריד</h2>
+          <p>התשובות ישמשו לתכנון היריד. <b>אפשר לדלג על כל שאלה.</b></p>
+        </div>
+
+        <!-- 3. About you -->
+        <section class="card">
+          <h2 class="card-title"><span class="step">3</span>קצת עליך</h2>
+
+          <div class="grid-2">
+            <div class="field" data-label="גיל">
+              <label class="label" for="age">מה גילך?</label>
+              <input type="number" id="age" name="age" min="16" max="99" inputmode="numeric">
+              <span class="error-msg">נא להזין גיל בין 16 ל-99</span>
+            </div>
+          </div>
+
+          <div class="field" data-label="מצב משפחתי">
+            <span class="label">מה מצבך המשפחתי?</span>
+            <div class="choices">
+              <label class="chip"><input type="radio" name="maritalStatus" value="רווק/ה"><span>רווק/ה</span></label>
+              <label class="chip"><input type="radio" name="maritalStatus" value="נשוי/אה"><span>נשוי/אה</span></label>
+              <label class="chip"><input type="radio" name="maritalStatus" value="בזוגיות"><span>בזוגיות</span></label>
+              <label class="chip"><input type="radio" name="maritalStatus" value="גרוש/ה"><span>גרוש/ה</span></label>
+              <label class="chip"><input type="radio" name="maritalStatus" value="אחר" data-show="maritalOther"><span>אחר</span></label>
+            </div>
+            <input type="text" id="maritalOther" name="maritalOther" class="other-input" data-label="מצב משפחתי – אחר" placeholder="פרטו" aria-label="מצב משפחתי – אחר" hidden>
+          </div>
+
+          <div class="grid-2">
+            <div class="field" data-label="ילדים">
+              <span class="label">האם יש לך ילדים?</span>
+              <div class="choices">
+                <label class="chip"><input type="radio" name="hasChildren" value="כן" data-show="childrenCountField"><span>כן</span></label>
+                <label class="chip"><input type="radio" name="hasChildren" value="לא"><span>לא</span></label>
+              </div>
+            </div>
+            <div class="field" id="childrenCountField" data-label="מספר ילדים" hidden>
+              <label class="label" for="childrenCount">כמה ילדים?</label>
+              <input type="number" id="childrenCount" name="childrenCount" min="1" max="20" inputmode="numeric">
+              <span class="error-msg">נא להזין מספר בין 1 ל-20</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. Employment & studies -->
+        <section class="card">
+          <h2 class="card-title"><span class="step">4</span>תעסוקה ולימודים</h2>
+
+          <div class="field" data-label="מצב תעסוקה ולימודים">
+            <span class="label">מה מצבך כיום בתעסוקה ובלימודים?</span>
+            <div class="choices">
+              <label class="chip"><input type="radio" name="currentStatus" value="עובד/ת"><span>עובד/ת</span></label>
+              <label class="chip"><input type="radio" name="currentStatus" value="לומד/ת"><span>לומד/ת</span></label>
+              <label class="chip"><input type="radio" name="currentStatus" value="גם עובד/ת וגם לומד/ת"><span>גם עובד/ת וגם לומד/ת</span></label>
+              <label class="chip"><input type="radio" name="currentStatus" value="אף אחד מהם"><span>אף אחד מהם</span></label>
+              <label class="chip"><input type="radio" name="currentStatus" value="מחפש/ת כיוון"><span>מחפש/ת כיוון</span></label>
+            </div>
+          </div>
+
+          <div class="field" data-label="היקף משרה מתאים">
+            <span class="label">באיזה היקף משרה מתאים לך לעבוד?</span>
+            <div class="choices">
+              <label class="chip"><input type="radio" name="jobScope" value="25%"><span>25%</span></label>
+              <label class="chip"><input type="radio" name="jobScope" value="50%"><span>50%</span></label>
+              <label class="chip"><input type="radio" name="jobScope" value="75%"><span>75%</span></label>
+              <label class="chip"><input type="radio" name="jobScope" value="משרה מלאה"><span>משרה מלאה</span></label>
+              <label class="chip"><input type="radio" name="jobScope" value="משרת אם"><span>משרת אם</span></label>
+              <label class="chip"><input type="radio" name="jobScope" value="אחר" data-show="jobScopeOther"><span>אחר</span></label>
+            </div>
+            <input type="text" id="jobScopeOther" name="jobScopeOther" class="other-input" data-label="היקף משרה – אחר" placeholder="פרטו" aria-label="היקף משרה – אחר" hidden>
+          </div>
+
+          <div class="field" data-label="תחומים לעבודה / לימודים">
+            <label class="label" for="fieldsOfInterest">באילו תחומים היית רוצה לעבוד או ללמוד?</label>
+            <input type="text" id="fieldsOfInterest" name="fieldsOfInterest" placeholder="לדוגמה: הייטק, חינוך, עסק עצמאי, הנדסאות">
+          </div>
+        </section>
+
+        <!-- 5. The injury and the way forward -->
+        <section class="card">
+          <h2 class="card-title"><span class="step">5</span>הפציעה והדרך קדימה</h2>
+
+          <div class="field" data-label="מה מאתגר בהתמודדות עם הפציעה">
+            <span class="label">מה מאתגר אותך בהתמודדות עם הפציעה?</span>
+            <span class="hint">אפשר לסמן כמה תשובות</span>
+            <div class="choices">
+              <label class="chip"><input type="checkbox" name="challenges" value="חיי היום־יום"><span>חיי היום־יום</span></label>
+              <label class="chip"><input type="checkbox" name="challenges" value="ניידות"><span>ניידות</span></label>
+              <label class="chip"><input type="checkbox" name="challenges" value="כסף"><span>כסף</span></label>
+              <label class="chip"><input type="checkbox" name="challenges" value="עבודה"><span>עבודה</span></label>
+              <label class="chip"><input type="checkbox" name="challenges" value="לימודים"><span>לימודים</span></label>
+              <label class="chip"><input type="checkbox" name="challenges" value="בירוקרטיה"><span>בירוקרטיה</span></label>
+              <label class="chip"><input type="checkbox" name="challenges" value="חברה"><span>חברה</span></label>
+              <label class="chip"><input type="checkbox" name="challenges" value="אחר" data-show="challengesOther"><span>אחר</span></label>
+            </div>
+            <input type="text" id="challengesOther" name="challengesOther" class="other-input" data-label="אתגרים – אחר" placeholder="פרטו" aria-label="אתגר – אחר" hidden>
+          </div>
+
+          <div class="field" data-label="מה יעזור להתמודד טוב יותר">
+            <label class="label" for="whatHelps">מה יכול לעזור לך להתמודד טוב יותר עם הפציעה?</label>
+            <textarea id="whatHelps" name="whatHelps"></textarea>
+          </div>
+
+          <div class="field" data-label="רצון מלפני הפציעה">
+            <span class="label">האם לפני הפציעה היה לך רצון לממש משהו שחשוב לך? האם הרצון הזה עדיין קיים?</span>
+            <span class="hint">למשל בתחום העבודה, הלימודים, העסק או הזוגיות</span>
+            <div class="choices">
+              <label class="chip"><input type="radio" name="preInjuryWish" value="כן, הרצון עדיין קיים"><span>כן, הרצון עדיין קיים</span></label>
+              <label class="chip"><input type="radio" name="preInjuryWish" value="הרצון השתנה"><span>הרצון השתנה</span></label>
+              <label class="chip"><input type="radio" name="preInjuryWish" value="הרצון כבר חלף"><span>הרצון כבר חלף</span></label>
+              <label class="chip"><input type="radio" name="preInjuryWish" value="לא היה לי רצון כזה"><span>לא היה לי רצון כזה</span></label>
+            </div>
+          </div>
+
+          <div class="field" data-label="חסר משהו כדי לממש את הרצון">
+            <span class="label">האם חסר לך משהו שיכול לעזור לך לממש את הרצון הזה?</span>
+            <div class="choices">
+              <label class="chip"><input type="radio" name="missingSomething" value="כן"><span>כן</span></label>
+              <label class="chip"><input type="radio" name="missingSomething" value="לא"><span>לא</span></label>
+              <label class="chip"><input type="radio" name="missingSomething" value="עדיין לא ברור לי"><span>עדיין לא ברור לי</span></label>
+            </div>
+          </div>
+
+          <div class="field" data-label="אמצעים שיעזרו לממש">
+            <span class="label">אילו אמצעים יכולים לעזור לך לממש את הרצון הזה?</span>
+            <span class="hint">אפשר לסמן כמה תשובות</span>
+            <div class="choices">
+              <label class="chip"><input type="checkbox" name="helpfulMeans" value="הכשרה והכוונה"><span>הכשרה והכוונה</span></label>
+              <label class="chip"><input type="checkbox" name="helpfulMeans" value="מימון"><span>מימון</span></label>
+              <label class="chip"><input type="checkbox" name="helpfulMeans" value="היכרות עם מעסיקים"><span>היכרות עם מעסיקים</span></label>
+              <label class="chip"><input type="checkbox" name="helpfulMeans" value="ליווי אישי"><span>ליווי אישי</span></label>
+              <label class="chip"><input type="checkbox" name="helpfulMeans" value="נגישות"><span>נגישות</span></label>
+              <label class="chip"><input type="checkbox" name="helpfulMeans" value="אחר" data-show="helpfulMeansOther"><span>אחר</span></label>
+            </div>
+            <input type="text" id="helpfulMeansOther" name="helpfulMeansOther" class="other-input" data-label="אמצעים – אחר" placeholder="פרטו" aria-label="אמצעים – אחר" hidden>
+          </div>
+        </section>
+
+        <!-- 6. The fair -->
+        <section class="card">
+          <h2 class="card-title"><span class="step">6</span>היריד</h2>
+
+          <div class="field" data-label="מה הכי מעניין ביריד">
+            <span class="label">מה הכי מעניין אותך ביריד?</span>
+            <span class="hint">אפשר לסמן כמה תשובות</span>
+            <div class="choices">
+              <label class="chip"><input type="checkbox" name="fairInterests" value="חברות מגייסות"><span>חברות מגייסות</span></label>
+              <label class="chip"><input type="checkbox" name="fairInterests" value="מוסדות לימוד"><span>מוסדות לימוד</span></label>
+              <label class="chip"><input type="checkbox" name="fairInterests" value="ייעוץ וליווי"><span>ייעוץ וליווי</span></label>
+              <label class="chip"><input type="checkbox" name="fairInterests" value="שוק עסקים של חברי העמותה"><span>שוק עסקים של חברי העמותה</span></label>
+              <label class="chip"><input type="checkbox" name="fairInterests" value="הופעה ואווירה"><span>הופעה ואווירה</span></label>
+              <label class="chip"><input type="checkbox" name="fairInterests" value="אחר" data-show="fairInterestsOther"><span>אחר</span></label>
+            </div>
+            <input type="text" id="fairInterestsOther" name="fairInterestsOther" class="other-input" data-label="מה מעניין – אחר" placeholder="פרטו" aria-label="מה מעניין ביריד – אחר" hidden>
+          </div>
+
+          <div class="field" data-label="העדפת מופע">
+            <span class="label">איזה מופע היית מעדיף/ה?</span>
+            <div class="choices">
+              <label class="chip"><input type="radio" name="showPreference" value="סטנדאפ"><span>🎤 סטנדאפ</span></label>
+              <label class="chip"><input type="radio" name="showPreference" value="זמר/ת"><span>🎶 זמר/ת</span></label>
+              <label class="chip"><input type="radio" name="showPreference" value="לא משנה לי"><span>לא משנה לי</span></label>
+            </div>
+          </div>
+
+          <div class="field" data-label="מתנה שתעזור להתקדם">
+            <label class="label" for="helpfulGift">איזו מתנה הייתה עוזרת לך להתקדם?</label>
+            <input type="text" id="helpfulGift" name="helpfulGift">
+          </div>
+
+          <div class="field" data-label="עוד משהו">
+            <label class="label" for="anythingElse">עוד משהו שחשוב לך שנדע?</label>
+            <textarea id="anythingElse" name="anythingElse"></textarea>
+          </div>
+        </section>
+
+        <p class="privacy-note">המידע ישמש את עמותת בלב אחד לתכנון היריד בלבד.</p>
+
+        <div class="submit-row">
+          <p class="form-error" role="alert"></p>
+          <button type="submit" class="btn btn-primary">שליחת ההרשמה</button>
+        </div>
+      </form>
+
+      <section class="card success" id="success" hidden>
+        <div class="check">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#14224b" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+        </div>
+        <h2>תודה, נרשמת ליריד!</h2>
+        <p>התשובות שלך יעזרו לנו לתכנן את היריד. נתראה ב-24.12.26 בשעה 10:00 באולם קסאנדו, פתח תקווה.</p>
+        <a class="btn btn-dark" href="index.html">חזרה לדף היריד</a>
+      </section>
+    </div>
+  </main>
+
+  <script src="forms.js"></script>
+  <script>
+    BelevForms.init({ form: '#members-form', formName: 'members-registration', netlify: false });
+  </script>
+</body>
+</html>

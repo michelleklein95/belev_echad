@@ -1,96 +1,114 @@
 /**
- * Belev Echad job fair – save reps registrations to this Google Sheet.
+ * Belev Echad job fair – save form registrations to this Google Sheet.
  *
- * Netlify sends every verified (non-spam) submission of the "reps-registration"
- * form to this script through an "Outgoing webhook" form notification.
- * Each submission becomes one row in the "הרשמות" tab, with Hebrew column titles.
+ * The website sends every registration here (see forms.js). Each form has its
+ * own tab; columns are created automatically from the question titles the
+ * website sends, so changing a form does not require changing this script.
  *
  * Setup: see google-sheets/README.md
  */
 
-// Must match the ?key=... part of the webhook URL in Netlify.
-// Keep the real value private – do not commit it to GitHub.
+// Must match the ?key=... part of SHEET_URL in forms.js.
+// Keep the real value out of GitHub (the filled-in copy is Code.local.gs).
 const SECRET = 'PASTE_SECRET_HERE';
 
-const SHEET_NAME = 'הרשמות';
+// form name sent by the website → tab name in this spreadsheet
+const TABS = {
+  'reps-registration': 'נציגי חברות ואקדמיה',
+  'members-registration': 'חברי העמותה',
+  'vendors-registration': 'דוכני מכירה',
+};
+// older tab names that should be renamed instead of creating a new tab
+const OLD_TAB_NAMES = { 'reps-registration': ['הרשמות'] };
 
-// [field name sent by the site, column title in the sheet]
-const COLUMNS = [
-  ['created_at',       'תאריך הרשמה'],
-  ['orgType',          'סוג ארגון'],
-  ['orgName',          'שם החברה / המוסד'],
-  ['field',            'תחום פעילות'],
-  ['contactName',      'איש/אשת קשר'],
-  ['role',             'תפקיד'],
-  ['phone',            'טלפון'],
-  ['email',            'אימייל'],
-  ['region',           'אזור'],
-  ['city',             'עיר / יישוב'],
-  ['repsCount',        'מספר נציגים'],
-  ['needs',            'צרכים בדוכן'],
-  ['needsOther',       'בקשות נוספות לדוכן'],
-  ['rollup',           'רולאפ'],
-  ['marketing',        'חומר שיווקי'],
-  ['marketingDetails', 'פירוט חומר שיווקי'],
-  ['positions',        'משרות / מסלולים'],
-  ['notes',            'הערות'],
-];
+const DATE_COLUMN = 'תאריך הרשמה';
 
 function doPost(e) {
   if (!e || !e.parameter || e.parameter.key !== SECRET) {
     return json({ ok: false, error: 'unauthorized' });
   }
+  let body;
+  try { body = JSON.parse(e.postData.contents || '{}'); } catch (err) { return json({ ok: false, error: 'bad json' }); }
 
-  const body = JSON.parse(e.postData.contents || '{}');
-  if (body.form_name && body.form_name !== 'reps-registration') {
-    return json({ ok: true, skipped: body.form_name });
-  }
-  const data = body.data || {};
+  const tab = TABS[body.form_name];
+  if (!tab) return json({ ok: true, skipped: body.form_name || '' });
 
-  const row = COLUMNS.map(([key]) => {
-    if (key === 'created_at') return new Date(body.created_at || Date.now());
-    const value = data[key] == null ? '' : String(data[key]);
-    // keep leading zeros in phone numbers (stored as text)
-    return key === 'phone' && value ? "'" + value : value;
-  });
+  // [[question title, answer], ...] in the order they appear on the form
+  const fields = Array.isArray(body.fields)
+    ? body.fields.filter(f => Array.isArray(f) && f.length === 2)
+    : Object.entries(body.data || {});
 
   const lock = LockService.getScriptLock();
   lock.waitLock(20000);
   try {
-    getSheet().appendRow(row);
+    const sheet = getSheet(body.form_name, tab);
+    const headers = ensureHeaders(sheet, fields.map(f => String(f[0])));
+    const values = new Map(fields.map(([k, v]) => [String(k), v]));
+    const row = headers.map(h => h === DATE_COLUMN ? new Date(body.created_at || Date.now()) : clean(values.get(h)));
+    sheet.appendRow(row);
   } finally {
     lock.releaseLock();
   }
   return json({ ok: true });
 }
 
-function getSheet() {
+function getSheet(formName, tab) {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
-  const sheet = ss.getSheetByName(SHEET_NAME) || ss.insertSheet(SHEET_NAME);
+  let sheet = ss.getSheetByName(tab);
+  if (!sheet) {
+    const old = (OLD_TAB_NAMES[formName] || []).map(n => ss.getSheetByName(n)).find(Boolean);
+    sheet = old ? old.setName(tab) : ss.insertSheet(tab);
+  }
   if (sheet.getLastRow() === 0) {
-    sheet.appendRow(COLUMNS.map(c => c[1]));
-    sheet.getRange(1, 1, 1, COLUMNS.length).setFontWeight('bold').setBackground('#fde49b');
+    sheet.appendRow([DATE_COLUMN]);
     sheet.setFrozenRows(1);
     sheet.setRightToLeft(true);
     sheet.getRange('A:A').setNumberFormat('dd/MM/yyyy HH:mm');
+    styleHeader(sheet, 1, 1);
   }
   return sheet;
+}
+
+/** Makes sure every question has a column; adds missing ones at the end. Returns the header row. */
+function ensureHeaders(sheet, labels) {
+  const lastCol = Math.max(sheet.getLastColumn(), 1);
+  const headers = sheet.getRange(1, 1, 1, lastCol).getValues()[0].map(String);
+  const missing = labels.filter((l, i) => l && l !== DATE_COLUMN && !headers.includes(l) && labels.indexOf(l) === i);
+  if (missing.length) {
+    sheet.getRange(1, headers.length + 1, 1, missing.length).setValues([missing]);
+    styleHeader(sheet, headers.length + 1, missing.length);
+    return headers.concat(missing);
+  }
+  return headers;
+}
+
+function styleHeader(sheet, fromCol, count) {
+  sheet.getRange(1, fromCol, 1, count).setFontWeight('bold').setBackground('#fde49b');
+}
+
+/** Text as-is; keeps leading zeros (phones) and stops answers from being run as formulas. */
+function clean(value) {
+  if (value == null) return '';
+  const s = String(value);
+  if (/^[=+\-@]/.test(s) || /^0\d/.test(s)) return "'" + s;
+  return s;
 }
 
 function json(obj) {
   return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
 }
 
-/** Run this once from the Apps Script editor to approve permissions and add a test row. */
+/** Run from the Apps Script editor to check permissions – adds one test row to the members tab. */
 function testInsert() {
-  doPost({
+  const out = doPost({
     parameter: { key: SECRET },
     postData: {
       contents: JSON.stringify({
-        form_name: 'reps-registration',
+        form_name: 'members-registration',
         created_at: new Date().toISOString(),
-        data: { orgType: 'בדיקה', orgName: 'שורת בדיקה – אפשר למחוק', phone: '050-0000000', repsCount: '2' },
+        fields: [['שם מלא', 'שורת בדיקה – אפשר למחוק'], ['טלפון', '050-0000000']],
       }),
     },
   });
+  Logger.log(out.getContent());
 }

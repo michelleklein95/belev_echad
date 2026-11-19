@@ -36,13 +36,12 @@
         <!-- Netlify Forms: form name + spam trap + fields that JS fills in -->
         <input type="hidden" name="form-name" value="reps-registration">
         <p hidden><label>Leave empty: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
-        <input type="hidden" name="positions">
 
         <!-- 1. Organization -->
         <section class="card">
           <h2 class="card-title"><span class="step">1</span>פרטי הארגון</h2>
 
-          <div class="field" data-group="orgType">
+          <div class="field" data-label="סוג ארגון">
             <span class="label">מי אתם? <span class="req">*</span></span>
             <div class="type-cards" role="radiogroup" aria-label="סוג הארגון">
               <div class="type-card">
@@ -66,30 +65,30 @@
           <div class="grid-2">
             <div class="field">
               <label class="label" for="orgName"><span id="orgNameLabel">שם החברה</span> <span class="req">*</span></label>
-              <input type="text" id="orgName" name="orgName" required autocomplete="organization">
+              <input type="text" id="orgName" name="orgName" data-label="שם החברה / המוסד" required autocomplete="organization">
               <span class="error-msg">שדה חובה</span>
             </div>
             <div class="field">
               <label class="label" for="field">תחום פעילות</label>
-              <input type="text" id="field" name="field" placeholder="לדוגמה: הייטק, לוגיסטיקה, הנדסה">
+              <input type="text" id="field" name="field" data-label="תחום פעילות" placeholder="לדוגמה: הייטק, לוגיסטיקה, הנדסה">
             </div>
             <div class="field">
               <label class="label" for="contactName">שם איש/אשת הקשר <span class="req">*</span></label>
-              <input type="text" id="contactName" name="contactName" required autocomplete="name">
+              <input type="text" id="contactName" name="contactName" data-label="איש/אשת קשר" required autocomplete="name">
               <span class="error-msg">שדה חובה</span>
             </div>
             <div class="field">
               <label class="label" for="role">תפקיד</label>
-              <input type="text" id="role" name="role" autocomplete="organization-title">
+              <input type="text" id="role" name="role" data-label="תפקיד" autocomplete="organization-title">
             </div>
             <div class="field">
               <label class="label" for="phone">טלפון <span class="req">*</span></label>
-              <input type="tel" id="phone" name="phone" required autocomplete="tel" inputmode="tel" pattern="^\+?[0-9\s\-]{9,15}$" placeholder="050-0000000">
+              <input type="tel" id="phone" name="phone" data-label="טלפון" required autocomplete="tel" inputmode="tel" pattern="^\+?[0-9\s\-]{9,15}$" placeholder="050-0000000">
               <span class="error-msg">נא להזין מספר טלפון תקין</span>
             </div>
             <div class="field">
               <label class="label" for="email">אימייל <span class="req">*</span></label>
-              <input type="email" id="email" name="email" required autocomplete="email" placeholder="name@company.co.il">
+              <input type="email" id="email" name="email" data-label="אימייל" required autocomplete="email" placeholder="name@company.co.il">
               <span class="error-msg">נא להזין כתובת אימייל תקינה</span>
             </div>
           </div>
@@ -101,7 +100,7 @@
           <div class="grid-2">
             <div class="field">
               <label class="label" for="region">אזור <span class="req">*</span></label>
-              <select id="region" name="region" required>
+              <select id="region" name="region" data-label="אזור" required>
                 <option value="">בחרו אזור</option>
                 <option>צפון</option>
                 <option>חיפה והקריות</option>
@@ -117,7 +116,7 @@
             </div>
             <div class="field">
               <label class="label" for="city">עיר / יישוב <span class="req">*</span></label>
-              <input type="text" id="city" name="city" required autocomplete="address-level2" placeholder="לדוגמה: פתח תקווה">
+              <input type="text" id="city" name="city" data-label="עיר / יישוב" required autocomplete="address-level2" placeholder="לדוגמה: פתח תקווה">
               <span class="error-msg">שדה חובה</span>
             </div>
           </div>
@@ -132,14 +131,14 @@
             <div>
               <div class="stepper">
                 <button type="button" data-step="1" aria-label="הוספת נציג">+</button>
-                <input type="number" id="repsCount" name="repsCount" value="2" min="1" max="20" required inputmode="numeric">
+                <input type="number" id="repsCount" name="repsCount" data-label="מספר נציגים" value="2" min="1" max="20" required inputmode="numeric">
                 <button type="button" data-step="-1" aria-label="הפחתת נציג">−</button>
               </div>
             </div>
             <span class="error-msg">נא להזין מספר בין 1 ל-20</span>
           </div>
 
-          <div class="field">
+          <div class="field" data-label="צרכים בדוכן">
             <span class="label">מה תצטרכו מהמארגנים בדוכן?</span>
             <span class="hint">אפשר לסמן כמה אפשרויות</span>
             <div class="choices">
@@ -155,7 +154,7 @@
 
           <div class="field">
             <label class="label" for="needsOther">בקשות נוספות לדוכן</label>
-            <textarea id="needsOther" name="needsOther" placeholder="כל דבר נוסף שיעזור לכם להציג בצורה הטובה ביותר"></textarea>
+            <textarea id="needsOther" name="needsOther" data-label="בקשות נוספות לדוכן" placeholder="כל דבר נוסף שיעזור לכם להציג בצורה הטובה ביותר"></textarea>
           </div>
         </section>
 
@@ -163,7 +162,7 @@
         <section class="card">
           <h2 class="card-title"><span class="step">4</span>חומרי תצוגה</h2>
 
-          <div class="field" data-group="rollup">
+          <div class="field" data-label="רולאפ">
             <div class="yn-row">
               <span class="label">האם יש לכם רולאפ ייצוגי להציב ביריד? <span class="req">*</span></span>
               <div class="choices">
@@ -174,11 +173,11 @@
             <span class="error-msg">נא לבחור תשובה</span>
           </div>
 
-          <div class="field" data-group="marketing">
+          <div class="field" data-label="חומר שיווקי">
             <div class="yn-row">
               <span class="label">האם יש לכם חומר שיווקי להציג / לחלק ביריד? <span class="req">*</span></span>
               <div class="choices">
-                <label class="chip"><input type="radio" name="marketing" value="כן" required><span>כן</span></label>
+                <label class="chip"><input type="radio" name="marketing" value="כן" data-show="marketingDetailsField" required><span>כן</span></label>
                 <label class="chip"><input type="radio" name="marketing" value="לא"><span>לא</span></label>
               </div>
             </div>
@@ -187,7 +186,7 @@
 
           <div class="field" id="marketingDetailsField" hidden>
             <label class="label" for="marketingDetails">איזה חומר שיווקי?</label>
-            <input type="text" id="marketingDetails" name="marketingDetails" placeholder="לדוגמה: עלונים, כרטיסי ביקור, מתנות קטנות">
+            <input type="text" id="marketingDetails" name="marketingDetails" data-label="פירוט חומר שיווקי" placeholder="לדוגמה: עלונים, כרטיסי ביקור, מתנות קטנות">
           </div>
         </section>
 
@@ -196,6 +195,7 @@
           <h2 class="card-title"><span class="step">5</span><span id="jobsTitle">אילו משרות פנויות תציעו ביריד?</span></h2>
           <p class="hint" id="jobsHint" style="margin:0 0 14px">הוסיפו את המשרות הפתוחות שתרצו להציג למבקרים. אפשר להוסיף כמה שורות.</p>
 
+          <input type="hidden" name="positions" data-label="משרות / מסלולים">
           <div id="jobs"></div>
           <button type="button" class="add-btn" id="addJob">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
@@ -204,12 +204,12 @@
 
           <div class="field" style="margin-top:18px">
             <label class="label" for="notes">הערות נוספות</label>
-            <textarea id="notes" name="notes" placeholder="משהו נוסף שחשוב לנו לדעת?"></textarea>
+            <textarea id="notes" name="notes" data-label="הערות" placeholder="משהו נוסף שחשוב לנו לדעת?"></textarea>
           </div>
         </section>
 
         <div class="submit-row">
-          <p class="form-error" id="formError" role="alert">יש שדות שדורשים השלמה – סימנו אותם באדום.</p>
+          <p class="form-error" role="alert"></p>
           <button type="submit" class="btn btn-primary" id="submitBtn">שליחת ההרשמה</button>
         </div>
       </form>
@@ -243,41 +243,8 @@
     </div>
   </template>
 
+  <script src="forms.js"></script>
   <script>
-    /*
-     * ===== Where submissions go =====
-     * Every registration is sent to two places at once:
-     *  1. Google Sheet – via the Apps Script web app below (see google-sheets/README.md).
-     *  2. Netlify Forms (form name: "reps-registration") – a backup copy in the
-     *     Netlify dashboard under the "Forms" tab.
-     * When the page is opened as a local file (not on Netlify), the form runs in
-     * demo mode: it validates, shows the thank-you screen and logs the data to the
-     * browser console – nothing is sent.
-     */
-    const NETLIFY_FORM_NAME = 'reps-registration';
-    const SHEET_URL = 'https://script.google.com/macros/s/AKfycbxJUaKuYcrJ2JgOoV1bqD3ORVek8WEDKYg3JRVMRTX7G3LaCGajkiVvdWgXv_DO0v8H/exec?key=7d626b23f50b428c54bd8342fcdd0748';
-    const IS_LOCAL = location.protocol === 'file:';
-
-    function sendToNetlify(data, botField) {
-      const body = new URLSearchParams({ 'form-name': NETLIFY_FORM_NAME, 'bot-field': botField, ...data });
-      return fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: body.toString()
-      }).then(res => { if (!res.ok) throw new Error('Netlify: ' + res.status); });
-    }
-
-    function sendToSheet(data) {
-      // Apps Script does not answer CORS preflights, so send plain text without reading the reply.
-      return fetch(SHEET_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify({ form_name: NETLIFY_FORM_NAME, created_at: new Date().toISOString(), data })
-      });
-    }
-
-    const form = document.getElementById('reg-form');
     const jobsEl = document.getElementById('jobs');
     const jobTpl = document.getElementById('jobTpl');
 
@@ -311,7 +278,7 @@
         row.style.gridTemplateColumns = t.scope ? '' : '1fr auto';
       });
     }
-    form.querySelectorAll('input[name="orgType"]').forEach(r =>
+    document.querySelectorAll('input[name="orgType"]').forEach(r =>
       r.addEventListener('change', () => { mode = r.id === 't-academy' ? 'academy' : 'company'; applyMode(); })
     );
 
@@ -329,117 +296,20 @@
     document.getElementById('addJob').addEventListener('click', () => addJob(true));
     addJob(false);
 
-    /* ---------- Reps stepper ---------- */
-    const reps = document.getElementById('repsCount');
-    document.querySelectorAll('.stepper button').forEach(b =>
-      b.addEventListener('click', () => {
-        const v = Math.min(20, Math.max(1, (parseInt(reps.value, 10) || 0) + Number(b.dataset.step)));
-        reps.value = v;
-        reps.closest('.field').classList.remove('invalid');
-      })
-    );
-
-    /* ---------- Marketing details toggle ---------- */
-    form.querySelectorAll('input[name="marketing"]').forEach(r =>
-      r.addEventListener('change', () => {
-        document.getElementById('marketingDetailsField').hidden = r.value !== 'כן';
-      })
-    );
-
-    /* ---------- Validation ---------- */
-    function validate() {
-      let firstBad = null;
-      form.querySelectorAll('.field').forEach(f => f.classList.remove('invalid'));
-
-      form.querySelectorAll('input[required], select[required], textarea[required]').forEach(el => {
-        const field = el.closest('.field');
-        let ok;
-        if (el.type === 'radio') ok = !!form.querySelector(`input[name="${el.name}"]:checked`);
-        else { el.value = el.value.trim(); ok = el.checkValidity(); }
-        if (!ok) {
-          field.classList.add('invalid');
-          if (!firstBad) firstBad = el;
-        }
-      });
-      return firstBad;
-    }
-    // clear the red state as soon as the user fixes a field
-    function clearIfFixed(e) {
-      const f = e.target.closest('.field');
-      if (!f || !f.classList.contains('invalid')) return;
-      const el = f.querySelector('[required]');
-      if (!el) return;
-      const ok = el.type === 'radio' ? !!form.querySelector(`input[name="${el.name}"]:checked`) : el.checkValidity();
-      if (ok) f.classList.remove('invalid');
-    }
-    form.addEventListener('input', clearIfFixed);
-    form.addEventListener('change', clearIfFixed);
-
-    /* ---------- Collect & submit ---------- */
-    function collect() {
-      const fd = new FormData(form);
-      const jobs = [...jobsEl.querySelectorAll('.job-row')]
-        .map(r => ({ title: r.querySelector('input').value.trim(), scope: mode === 'company' ? r.querySelector('select').value : '' }))
-        .filter(j => j.title);
-      return {
-        orgType: fd.get('orgType'),
-        orgName: fd.get('orgName'),
-        field: fd.get('field'),
-        contactName: fd.get('contactName'),
-        role: fd.get('role'),
-        phone: fd.get('phone'),
-        email: fd.get('email'),
-        region: fd.get('region'),
-        city: fd.get('city'),
-        repsCount: Number(fd.get('repsCount')),
-        needs: fd.getAll('needs').join(', '),
-        needsOther: fd.get('needsOther'),
-        rollup: fd.get('rollup'),
-        marketing: fd.get('marketing'),
-        marketingDetails: fd.get('marketing') === 'כן' ? fd.get('marketingDetails') : '',
-        positions: jobs.map(j => j.scope ? `${j.title} (${j.scope})` : j.title).join(' | '),
-        notes: fd.get('notes')
-      };
-    }
-
-    form.addEventListener('submit', async e => {
-      e.preventDefault();
-      const errBox = document.getElementById('formError');
-      const firstBad = validate();
-      if (firstBad) {
-        errBox.style.display = 'block';
-        firstBad.closest('.field').scrollIntoView({ behavior: 'smooth', block: 'center' });
-        setTimeout(() => firstBad.focus({ preventScroll: true }), 350);
-        return;
-      }
-      errBox.style.display = 'none';
-
-      const data = collect();
-      const btn = document.getElementById('submitBtn');
-      btn.disabled = true;
-      btn.textContent = 'שולחים...';
-
-      try {
-        if (IS_LOCAL) {
-          console.info('[demo mode] registration data (opened as a local file, nothing was sent):', data);
-        } else {
-          const botField = form.querySelector('[name="bot-field"]').value;
-          const jobs = [sendToNetlify(data, botField)];
-          if (!botField) jobs.push(sendToSheet(data)); // spam trap filled → keep it out of the sheet
-          const results = await Promise.allSettled(jobs);
-          results.filter(r => r.status === 'rejected').forEach(r => console.error(r.reason));
-          // succeed if at least one destination got the registration
-          if (!results.some(r => r.status === 'fulfilled')) throw new Error('Submit failed');
-        }
-        form.hidden = true;
-        document.getElementById('success').hidden = false;
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } catch (err) {
-        console.error(err);
-        errBox.textContent = 'אירעה שגיאה בשליחה. נא לבדוק את החיבור לאינטרנט ולנסות שוב.';
-        errBox.style.display = 'block';
-        btn.disabled = false;
-        btn.textContent = 'שליחת ההרשמה';
+    BelevForms.init({
+      form: '#reg-form',
+      formName: 'reps-registration',
+      netlify: true,
+      // the job rows are free-form, so join them into the hidden "positions" field before sending
+      beforeSubmit(form) {
+        form.querySelector('[name="positions"]').value = [...jobsEl.querySelectorAll('.job-row')]
+          .map(r => {
+            const title = r.querySelector('input').value.trim();
+            const scope = mode === 'company' ? r.querySelector('select').value : '';
+            return title && (scope ? `${title} (${scope})` : title);
+          })
+          .filter(Boolean)
+          .join(' | ');
       }
     });
   </script>

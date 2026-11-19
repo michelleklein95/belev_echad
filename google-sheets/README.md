@@ -1,38 +1,35 @@
 # Registrations → Google Sheet
 
-When someone submits the registration form, `register.html` sends the answers straight
-to a small **Google Apps Script** (`Code.gs`) attached to the sheet (`SHEET_URL` in
-`register.html`), and also to Netlify Forms as a backup copy.
-Each registration becomes a row in the `הרשמות` tab, with Hebrew column titles.
+All three registration forms send their answers to one Google Sheet, through a small
+**Google Apps Script** (`Code.gs`) attached to the sheet. Each form has its own tab:
 
-Note: because the page sends to the sheet directly, the `?key=` value is visible in the
-page source. It only stops casual misuse; if junk rows ever show up, change `SECRET` in
-the script and the key in `SHEET_URL` together.
+| Page | Form name | Tab |
+|---|---|---|
+| `members.html` | `members-registration` | חברי העמותה |
+| `register.html` | `reps-registration` | נציגי חברות ואקדמיה (renamed automatically from the old `הרשמות` tab) |
+| `vendors.html` | `vendors-registration` | דוכני מכירה |
 
-Step 5 below (Netlify webhook) is optional – it is not needed while the page sends directly,
-and form notifications may not be available on Netlify's free plan.
+Columns are created automatically from each question's `data-label` (see `forms.js`),
+in the order the questions appear on the form, so editing a form does not require
+changing the script. The reps and vendors forms also keep a backup copy in Netlify Forms;
+the members form goes to the sheet only (Netlify's free plan allows ~100 submissions a month).
+
+The web app URL and key live in `SHEET_URL` at the top of `forms.js`. Because the page sends
+to the sheet directly, the key is visible in the page source – it only stops casual misuse.
+If junk rows ever show up, change `SECRET` in the script and the key in `SHEET_URL` together.
 
 ## One-time setup
 
-1. **Create the sheet** – in Google Drive: New → Google Sheets, name it e.g. `הרשמות ליריד`.
+1. **Create the sheet** – in Google Drive: New → Google Sheets.
 2. **Add the script** – in the sheet: Extensions → Apps Script. Delete what is there,
-   paste the contents of `Code.gs`, and replace `PASTE_SECRET_HERE` with the secret key
-   (any long random string; keep it private). Save (Ctrl+S).
-3. **Approve and test** – choose `testInsert` in the function dropdown → Run.
-   Google asks for permission: Review permissions → choose the account →
-   Advanced → Go to … (unsafe) → Allow. A `הרשמות` tab with a test row appears.
-4. **Publish the script** – Deploy → New deployment → ⚙ → Web app.
-   Execute as: **Me**. Who has access: **Anyone**. Deploy → copy the **Web app URL**.
-5. **Connect Netlify** – Project configuration → Notifications → Emails and webhooks →
-   Form submission notifications → Add notification → **HTTP POST request** (outgoing webhook):
-   - Event: New form submission
-   - URL: `<Web app URL>?key=<secret key>`
-   - Form: `reps-registration`
-6. **Test** – submit a registration on the live site; a new row should appear within seconds.
+   paste the contents of `Code.gs`, and replace `PASTE_SECRET_HERE` with the secret key.
+   Save (Ctrl+S). (Tip: if Apps Script won't open, use an incognito window signed in to one Google account.)
+3. **Approve and test** – choose `testInsert` in the function dropdown → Run → approve permissions
+   (Advanced → Go to … (unsafe) → Allow). A `חברי העמותה` tab with a test row appears.
+4. **Publish** – Deploy → New deployment → ⚙ → Web app. Execute as: **Me**.
+   Who has access: **Anyone**. Deploy → copy the Web app URL into `SHEET_URL` in `forms.js`.
 
-## Notes
+## Updating the script later
 
-- Registrations sent before the webhook was added are not copied automatically –
-  download them from Netlify (Forms → reps-registration → Download as CSV) and paste them in.
-- If you change `Code.gs` later: Deploy → Manage deployments → ✏ → Version: New version → Deploy
-  (the URL stays the same).
+Paste the new code, save, then **Deploy → Manage deployments → ✏ (edit) → Version: New version → Deploy**.
+The URL stays the same, so nothing on the website needs to change.
