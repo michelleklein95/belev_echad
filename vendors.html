@@ -167,22 +167,21 @@
           <h2 class="card-title"><span class="step">3</span>צוות ולוגיסטיקה בדוכן</h2>
 
           <div class="field" data-label="מספר נציגים בדוכן">
-            <span class="label">כמה נציגים יפעילו את הדוכן ביום היריד? <span class="req">*</span></span>
-            <div class="choices">
-              <label class="chip"><input type="radio" name="staffCount" value="1" required><span>1</span></label>
-              <label class="chip"><input type="radio" name="staffCount" value="2"><span>2</span></label>
-              <label class="chip"><input type="radio" name="staffCount" value="3 ומעלה"><span>3 ומעלה</span></label>
+            <label class="label" for="staffCount">כמה נציגים יפעילו את הדוכן ביום היריד? <span class="req">*</span></label>
+            <div>
+              <div class="stepper">
+                <button type="button" data-step="1" aria-label="הוספת נציג">+</button>
+                <input type="number" id="staffCount" name="staffCount" value="2" min="1" max="20" required inputmode="numeric">
+                <button type="button" data-step="-1" aria-label="הפחתת נציג">−</button>
+              </div>
             </div>
-            <span class="error-msg">נא לבחור תשובה</span>
+            <span class="error-msg">נא להזין מספר בין 1 ל-20</span>
           </div>
 
           <div class="field" data-label="צרכים מהמארגנים">
             <span class="label">מה אתם צריכים מאיתנו לטובת הדוכן?</span>
             <span class="hint">אפשר לסמן כמה אפשרויות</span>
             <div class="choices">
-              <label class="chip"><input type="checkbox" name="needs" value="שולחן תצוגה"><span>שולחן תצוגה</span></label>
-              <label class="chip"><input type="checkbox" name="needs" value="מפה לשולחן"><span>מפה לשולחן</span></label>
-              <label class="chip"><input type="checkbox" name="needs" value="כיסאות" data-show="chairsField"><span>כיסאות</span></label>
               <label class="chip"><input type="checkbox" name="needs" value="נקודת חשמל" data-show="powerField"><span>נקודת חשמל</span></label>
               <label class="chip"><input type="checkbox" name="needs" value="מקום נוסף לצד השולחן" data-show="spaceField"><span>מקום נוסף לצד השולחן</span></label>
               <label class="chip"><input type="checkbox" name="needs" value="אחר" data-show="needsOther"><span>אחר</span></label>
@@ -190,17 +189,6 @@
           </div>
 
           <div class="sub-fields">
-            <div class="field" id="chairsField" data-label="כמות כיסאות" hidden>
-              <label class="label" for="chairs">כמה כיסאות?</label>
-              <div>
-                <div class="stepper">
-                  <button type="button" data-step="1" aria-label="הוספת כיסא">+</button>
-                  <input type="number" id="chairs" name="chairs" value="2" min="1" max="10" inputmode="numeric">
-                  <button type="button" data-step="-1" aria-label="הפחתת כיסא">−</button>
-                </div>
-              </div>
-              <span class="error-msg">נא להזין מספר בין 1 ל-10</span>
-            </div>
             <div class="field" id="powerField" data-label="ציוד שדורש חשמל" hidden>
               <label class="label" for="powerFor">לאיזה ציוד נדרש חשמל?</label>
               <input type="text" id="powerFor" name="powerFor" placeholder="לדוגמה: קופה, תאורה, מכונת קפה">

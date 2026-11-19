@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>הרשמת חברי העמותה | בלב אחד</title>
-  <meta name="description" content="הרשמה ושאלון קצר לחברי עמותת בלב אחד לקראת יריד התעסוקה והלימודים, 24.12.26.">
+  <meta name="description" content="הרשמה ושאלון לחברי עמותת בלב אחד לקראת יריד התעסוקה והלימודים, 24.12.26.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;800;900&display=swap" rel="stylesheet">
@@ -28,7 +28,7 @@
     <div class="page-head">
       <span class="eyebrow">יריד תעסוקה ולימודים · 24.12.26 · 10:00 · אולם קסאנדו, פתח תקווה</span>
       <h1>הרשמה ליריד – חברי העמותה</h1>
-      <p>נשמח לראות אתכם! השאירו פרטים כדי להירשם, ואם תרצו – ענו על שאלון קצר שיעזור לנו להתאים את היריד בדיוק בשבילכם. שדות המסומנים ב-<span style="color:var(--danger)">*</span> הם שדות חובה.</p>
+      <p>נשמח לראות אתכם! השאירו פרטים כדי להירשם, ואם תרצו – ענו על שאלון שיעזור לנו להתאים את היריד בדיוק בשבילכם. שדות המסומנים ב-<span style="color:var(--danger)">*</span> הם שדות חובה.</p>
     </div>
 
     <div class="form-wrap">
@@ -61,45 +61,14 @@
           </div>
         </section>
 
-        <!-- 2. Coming to the fair -->
-        <section class="card">
-          <h2 class="card-title"><span class="step">2</span>ההגעה ליריד</h2>
-
-          <div class="field" data-label="מספר מלווים">
-            <label class="label" for="companions">כמה מלווים יגיעו איתך?</label>
-            <div>
-              <div class="stepper">
-                <button type="button" data-step="1" aria-label="הוספת מלווה">+</button>
-                <input type="number" id="companions" name="companions" value="0" min="0" max="10" inputmode="numeric">
-                <button type="button" data-step="-1" aria-label="הפחתת מלווה">−</button>
-              </div>
-            </div>
-            <span class="error-msg">נא להזין מספר בין 0 ל-10</span>
-          </div>
-
-          <div class="field" data-label="התאמות נגישות">
-            <span class="label">האם תזדקק/י להתאמות נגישות ביריד?</span>
-            <span class="hint">אפשר לסמן כמה תשובות – כדי שנדאג שיהיה לך נוח</span>
-            <div class="choices">
-              <label class="chip"><input type="checkbox" name="accessibility" value="חניית נכים"><span>חניית נכים</span></label>
-              <label class="chip"><input type="checkbox" name="accessibility" value="גישה לכיסא גלגלים"><span>גישה לכיסא גלגלים</span></label>
-              <label class="chip"><input type="checkbox" name="accessibility" value="מקום ישיבה"><span>מקום ישיבה</span></label>
-              <label class="chip"><input type="checkbox" name="accessibility" value="ליווי צמוד"><span>ליווי צמוד</span></label>
-              <label class="chip"><input type="checkbox" name="accessibility" value="אחר" data-show="accessibilityOther"><span>אחר</span></label>
-              <label class="chip"><input type="checkbox" name="accessibility" value="לא נדרש"><span>לא נדרש</span></label>
-            </div>
-            <input type="text" id="accessibilityOther" name="accessibilityOther" class="other-input" data-label="נגישות – אחר" placeholder="פרטו" aria-label="התאמות נגישות – אחר" hidden>
-          </div>
-        </section>
-
         <div class="section-note">
-          <h2>שאלון קצר לפני היריד</h2>
-          <p>התשובות ישמשו לתכנון היריד. <b>אפשר לדלג על כל שאלה.</b></p>
+          <h2>שאלון לפני היריד</h2>
+          <p>התשובות ישמשו לתכנון היריד.</p>
         </div>
 
-        <!-- 3. About you -->
+        <!-- 2. About you -->
         <section class="card">
-          <h2 class="card-title"><span class="step">3</span>קצת עליך</h2>
+          <h2 class="card-title"><span class="step">2</span>קצת עליך</h2>
 
           <div class="grid-2">
             <div class="field" data-label="גיל">
@@ -137,9 +106,9 @@
           </div>
         </section>
 
-        <!-- 4. Employment & studies -->
+        <!-- 3. Employment & studies -->
         <section class="card">
-          <h2 class="card-title"><span class="step">4</span>תעסוקה ולימודים</h2>
+          <h2 class="card-title"><span class="step">3</span>תעסוקה ולימודים</h2>
 
           <div class="field" data-label="מצב תעסוקה ולימודים">
             <span class="label">מה מצבך כיום בתעסוקה ובלימודים?</span>
@@ -171,9 +140,9 @@
           </div>
         </section>
 
-        <!-- 5. The injury and the way forward -->
+        <!-- 4. The injury and the way forward -->
         <section class="card">
-          <h2 class="card-title"><span class="step">5</span>הפציעה והדרך קדימה</h2>
+          <h2 class="card-title"><span class="step">4</span>הפציעה והדרך קדימה</h2>
 
           <div class="field" data-label="מה מאתגר בהתמודדות עם הפציעה">
             <span class="label">מה מאתגר אותך בהתמודדות עם הפציעה?</span>
@@ -231,9 +200,9 @@
           </div>
         </section>
 
-        <!-- 6. The fair -->
+        <!-- 5. The fair -->
         <section class="card">
-          <h2 class="card-title"><span class="step">6</span>היריד</h2>
+          <h2 class="card-title"><span class="step">5</span>היריד</h2>
 
           <div class="field" data-label="מה הכי מעניין ביריד">
             <span class="label">מה הכי מעניין אותך ביריד?</span>
