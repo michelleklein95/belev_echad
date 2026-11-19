@@ -59,16 +59,24 @@ a { color: inherit; }
   gap: 16px;
   flex-wrap: wrap;
 }
-.meta {
-  display: flex;
+.social { display: flex; align-items: center; gap: 10px; }
+.social-link {
+  display: inline-flex;
   align-items: center;
-  gap: 18px;
-  flex-wrap: wrap;
+  gap: 8px;
+  padding: 9px 16px;
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--navy);
   font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
 }
-.meta-item { display: inline-flex; align-items: center; gap: 8px; }
-.meta-item svg { flex: none; }
-.meta-divider { width: 2px; height: 26px; background: var(--navy); opacity: 0.8; }
+.social-link svg { flex: none; }
+.social-link:hover { border-color: var(--navy); background: var(--yellow-soft); transform: translateY(-1px); }
+.social-link:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
 
 /* ---------- Hero ---------- */
 .hero {
@@ -466,9 +474,10 @@ input:focus, select:focus, textarea:focus {
   .reps .btn { justify-self: center; }
 }
 @media (max-width: 600px) {
-  .topbar .container { justify-content: center; }
-  .meta { justify-content: center; gap: 10px; font-size: 0.95rem; }
-  .meta-divider { display: none; }
+  .topbar .container { flex-wrap: nowrap; }
+  .social { gap: 8px; }
+  .social-link { width: 42px; height: 42px; padding: 0; justify-content: center; }
+  .social-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .cd-details { flex-direction: column; align-items: center; gap: 8px; }
   .cd-detail { font-size: 1rem; }
   .feature .icon { width: 86px; height: 86px; }
