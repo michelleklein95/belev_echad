@@ -110,10 +110,17 @@ a { color: inherit; }
   font-weight: 900;
   line-height: 1.1;
 }
+.hero h1 + h2 { margin-top: 8px; }
 .hero .tagline {
   margin: 6px 0 0;
   font-size: clamp(1.15rem, 2.6vw, 1.6rem);
   font-weight: 400;
+}
+.save-date {
+  margin: 0;
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  font-weight: 900;
+  line-height: 1.15;
 }
 .megaphone { width: 100%; max-width: 360px; justify-self: center; }
 
