@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>יריד תעסוקה ולימודים | בלב אחד</title>
+  <meta name="description" content="חברי בלב אחד, שריינו את התאריך! יריד תעסוקה ולימודים ב-24.12.26 בשעה 10:00, אולם קסאנדו פתח תקווה.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Top info bar (as in the flyer) -->
+  <header class="topbar">
+    <div class="container">
+      <a class="logo" href="index.html" aria-label="בלב אחד – belev echad">
+        <span class="he">בלב<b>אחד</b></span>
+        <span class="sep" aria-hidden="true"></span>
+        <span class="en">belev<b>echad</b></span>
+      </a>
+      <div class="meta">
+        <span class="meta-item">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3" fill="#f9c623"/><path d="M3 10h18" stroke="#fff" stroke-width="1.6"/><path d="M8 3v4M16 3v4" stroke="#f9c623" stroke-width="2" stroke-linecap="round"/><g fill="#fff"><rect x="6" y="12.5" width="3" height="2.4" rx=".6"/><rect x="10.5" y="12.5" width="3" height="2.4" rx=".6"/><rect x="15" y="12.5" width="3" height="2.4" rx=".6"/><rect x="6" y="16.3" width="3" height="2.4" rx=".6"/><rect x="10.5" y="16.3" width="3" height="2.4" rx=".6"/></g></svg>
+          24.12.26
+        </span>
+        <span class="meta-divider" aria-hidden="true"></span>
+        <span class="meta-item">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="#34d399" stroke-width="2.2"/><path d="M12 7v5l3 2" stroke="#34d399" stroke-width="2.2" stroke-linecap="round"/></svg>
+          10:00
+        </span>
+        <span class="meta-divider" aria-hidden="true"></span>
+        <span class="meta-item">
+          <svg width="24" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Zm0 9.6A2.6 2.6 0 1 1 12 6.4a2.6 2.6 0 0 1 0 5.2Z" fill="#2f8fe6"/></svg>
+          אולם קסאנדו, פתח תקווה
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div>
+            <h1>חברי ״בלב אחד״,<br>שריינו את התאריך!</h1>
+            <p class="big-date">24.12.26</p>
+            <svg class="underline" viewBox="0 0 520 18" preserveAspectRatio="none" aria-hidden="true"><path d="M6 12 C 150 2, 360 2, 514 12" stroke="#f9c623" stroke-width="8" fill="none" stroke-linecap="round"/></svg>
+            <h2>יריד תעסוקה ולימודים</h2>
+            <p class="tagline">שיעזור לכם לפתוח הזדמנויות לחיים!</p>
+          </div>
+
+          <!-- Megaphone illustration -->
+          <svg class="megaphone" viewBox="0 0 300 300" aria-hidden="true">
+            <g stroke="#f9c623" stroke-width="10" stroke-linecap="round">
+              <path d="M222 62 L246 30"/><path d="M240 92 L276 74"/><path d="M196 46 L204 14"/>
+            </g>
+            <g stroke="#14224b" stroke-width="7" stroke-linejoin="round" stroke-linecap="round">
+              <path d="M150 196 L176 262 Q180 274 168 278 L150 284 Q138 287 134 276 L112 214" fill="#fdf3ea"/>
+              <path d="M58 132 L200 66 L232 214 L84 214 Z" fill="#fdf3ea"/>
+              <rect x="30" y="140" width="46" height="70" rx="14" fill="#fdf3ea" transform="rotate(-12 53 175)"/>
+              <ellipse cx="216" cy="140" rx="30" ry="78" transform="rotate(-14 216 140)" fill="#14224b"/>
+            </g>
+            <g stroke="#fdf3ea" stroke-width="7" stroke-linecap="round">
+              <path d="M204 104 L226 98"/><path d="M208 140 L234 140"/><path d="M214 176 L238 184"/>
+            </g>
+          </svg>
+        </div>
+
+        <!-- Countdown -->
+        <div class="countdown-wrap" role="timer" aria-live="off">
+          <p class="countdown-title">הספירה לאחור התחילה! נותרו עד היריד:</p>
+          <div class="countdown" id="countdown">
+            <div class="cd-unit"><span class="cd-num" id="cd-seconds">--</span><span class="cd-label">שניות</span></div>
+            <div class="cd-unit"><span class="cd-num" id="cd-minutes">--</span><span class="cd-label">דקות</span></div>
+            <div class="cd-unit"><span class="cd-num" id="cd-hours">--</span><span class="cd-label">שעות</span></div>
+            <div class="cd-unit"><span class="cd-num" id="cd-days">--</span><span class="cd-label">ימים</span></div>
+          </div>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=%D7%99%D7%A8%D7%99%D7%93%20%D7%AA%D7%A2%D7%A1%D7%95%D7%A7%D7%94%20%D7%95%D7%9C%D7%99%D7%9E%D7%95%D7%93%D7%99%D7%9D%20-%20%D7%91%D7%9C%D7%91%20%D7%90%D7%97%D7%93&dates=20261224T080000Z/20261224T120000Z&location=%D7%90%D7%95%D7%9C%D7%9D%20%D7%A7%D7%A1%D7%90%D7%A0%D7%93%D7%95%2C%20%D7%A4%D7%AA%D7%97%20%D7%AA%D7%A7%D7%95%D7%95%D7%94" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3" stroke="currentColor" stroke-width="2"/><path d="M3 10h18M8 3v4M16 3v4M12 13v5M9.5 15.5h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            הוסיפו ליומן
+          </a>
+          <a class="btn btn-ghost" href="https://waze.com/ul?q=אולם%20קסאנדו%20פתח%20תקווה&navigate=yes" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="9" r="2.5" stroke="currentColor" stroke-width="2"/></svg>
+            ניווט לאולם
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- What awaits you -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">מה מחכה לכם ביריד?</h2>
+        <div class="features">
+          <div class="feature">
+            <div class="icon bg-butter">
+              <svg width="56" height="56" viewBox="0 0 48 48" fill="none" stroke="#14224b" stroke-width="2.6" stroke-linejoin="round" aria-hidden="true"><path d="M6 18 L10 8 H38 L42 18"/><path d="M6 18 q3 5 6 0 q3 5 6 0 q3 5 6 0 q3 5 6 0 q3 5 6 0 q3 5 6 0"/><path d="M9 21 V40 H39 V21"/><path d="M5 40 H43"/><path d="M14 8 L12 18 M20 8 L19 18 M28 8 L29 18 M34 8 L36 18"/></svg>
+            </div>
+            <h3>דוכני<br>מכירה</h3>
+          </div>
+          <div class="feature">
+            <div class="icon bg-sky">
+              <svg width="56" height="56" viewBox="0 0 48 48" fill="none" stroke="#14224b" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M4 18 L24 9 L44 18 L24 27 Z" fill="#14224b"/><path d="M12 22 V32 Q24 39 36 32 V22"/><path d="M40 20 V31"/><circle cx="40" cy="33" r="2" fill="#14224b"/></svg>
+            </div>
+            <h3>מגוון מעסיקים<br>ונציגי אוניברסיטאות</h3>
+          </div>
+          <div class="feature">
+            <div class="icon bg-lilac">
+              <svg width="56" height="56" viewBox="0 0 48 48" fill="none" stroke="#14224b" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="31" cy="15" r="7" fill="#14224b"/><path d="M26 20 L12 36 Q10 39 13 40 L14 41 Q16 42 18 40 L30 22"/><path d="M14 40 Q10 44 8 42 Q6 41 8 38"/><path d="M38 5 L40 2 M42 10 L45 9 M24 4 L23 1"/></svg>
+            </div>
+            <h3>הופעה<br>בהפתעה</h3>
+          </div>
+          <div class="feature">
+            <div class="icon bg-mint">
+              <svg width="56" height="56" viewBox="0 0 48 48" fill="none" stroke="#14224b" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><rect x="7" y="18" width="34" height="8" rx="1.5"/><path d="M10 26 V42 H38 V26"/><path d="M24 18 V42"/><path d="M24 18 Q17 8 14 12 Q12 16 24 18 Q31 8 34 12 Q36 16 24 18"/><path d="M19 6 L20 9 M24 4 V7 M29 6 L28 9"/></svg>
+            </div>
+            <h3>הגרלה<br>שווה במיוחד</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Event details -->
+    <section class="section" style="padding-top:0">
+      <div class="container">
+        <h2 class="section-title">פרטי האירוע</h2>
+        <div class="details">
+          <div class="detail">
+            <div class="d-icon bg-butter"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#14224b" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></div>
+            <div><h3>תאריך</h3><p>יום חמישי, 24.12.2026</p></div>
+          </div>
+          <div class="detail">
+            <div class="d-icon bg-mint"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#14224b" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+            <div><h3>שעה</h3><p>10:00</p></div>
+          </div>
+          <div class="detail">
+            <div class="d-icon bg-sky"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#14224b" stroke-width="2" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
+            <div>
+              <h3>מיקום</h3><p>אולם קסאנדו, פתח תקווה</p>
+              <a class="small" href="https://waze.com/ul?q=אולם%20קסאנדו%20פתח%20תקווה&navigate=yes" target="_blank" rel="noopener">פתיחה ב-Waze ←</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reps registration -->
+    <section class="section" style="padding-top:0">
+      <div class="container">
+        <div class="reps">
+          <div>
+            <h2>נציגי חברות ומוסדות אקדמיים</h2>
+            <p>רוצים להציג ביריד? מלאו את טופס ההרשמה לדוכן ונדאג לכל מה שתצטרכו.</p>
+          </div>
+          <a class="btn btn-dark" href="register.html">
+            להרשמה לדוכן ביריד
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Closing -->
+    <section class="closing">
+      <div class="container">
+        <h2>העתיד שלכם מתחיל כאן!</h2>
+        <p>נתראה, עמותת בלב אחד</p>
+      </div>
+      <svg class="wave" viewBox="0 0 1440 140" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0 60 C 260 10, 520 10, 760 50 S 1220 110, 1440 40 V140 H0 Z" fill="#c5e2fb"/>
+        <path d="M0 90 C 300 40, 560 50, 820 80 S 1240 120, 1440 70 V140 H0 Z" fill="#2f8fe6" opacity=".55"/>
+        <path d="M0 110 C 320 80, 620 90, 880 108 S 1260 126, 1440 96 V140 H0 Z" fill="#14224b"/>
+        <path d="M0 126 C 360 104, 700 118, 960 124 S 1300 120, 1440 112 V140 H0 Z" fill="#f9c623"/>
+      </svg>
+    </section>
+  </main>
+
+  <script>
+    // Event start: 24.12.2026 at 10:00 Israel time (UTC+2 in December)
+    const EVENT_START = new Date('2026-12-24T10:00:00+02:00').getTime();
+    const EVENT_END_GUESS = EVENT_START + 6 * 60 * 60 * 1000; // treat the day as "today" for 6 hours
+
+    const els = {
+      wrap: document.getElementById('countdown'),
+      d: document.getElementById('cd-days'),
+      h: document.getElementById('cd-hours'),
+      m: document.getElementById('cd-minutes'),
+      s: document.getElementById('cd-seconds'),
+      title: document.querySelector('.countdown-title')
+    };
+    const pad = n => String(n).padStart(2, '0');
+
+    function tick() {
+      const now = Date.now();
+      const diff = EVENT_START - now;
+
+      if (diff <= 0) {
+        clearInterval(timer);
+        els.title.style.display = 'none';
+        els.wrap.innerHTML = now < EVENT_END_GUESS
+          ? '<p class="countdown-done">היריד מתקיים עכשיו! מחכים לכם 🎉</p>'
+          : '<p class="countdown-done">תודה שהגעתם! נתראה באירוע הבא 💛</p>';
+        return;
+      }
+
+      const sec = Math.floor(diff / 1000);
+      els.d.textContent = Math.floor(sec / 86400);
+      els.h.textContent = pad(Math.floor((sec % 86400) / 3600));
+      els.m.textContent = pad(Math.floor((sec % 3600) / 60));
+      els.s.textContent = pad(sec % 60);
+    }
+
+    const timer = setInterval(tick, 1000);
+    tick();
+  </script>
+</body>
+</html>
