@@ -1,0 +1,23 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Belev Echad//Job Fair 2026//HE
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:job-fair-2026-12-24@blev-echad.netlify.app
+DTSTAMP:20261120T000000Z
+DTSTART:20261224T080000Z
+DTEND:20261224T120000Z
+SUMMARY:יריד תעסוקה ולימודים - בלב אחד
+LOCATION:אולם קסאנאדו\, פתח תקווה
+DESCRIPTION:יריד תעסוקה ולימודים לחברי עמותת "
+ בלב אחד". פרטים והרשמה: https://blev-echad.netlify.app
+URL:https://blev-echad.netlify.app
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:מחר ב-10:00: יריד התעסוקה והלימודים ש
+ ל בלב אחד
+END:VALARM
+END:VEVENT
+END:VCALENDAR

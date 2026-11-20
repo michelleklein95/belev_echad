@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <a class="skip-link" href="#main">דלג לתוכן הראשי</a>
 
   <header class="topbar">
     <div class="container">
@@ -24,7 +25,7 @@
     </div>
   </header>
 
-  <main class="container">
+  <main class="container" id="main" tabindex="-1">
     <div class="page-head">
       <span class="eyebrow">יריד תעסוקה ולימודים · 24.12.26 · 10:00 · אולם קסאנאדו, פתח תקווה</span>
       <h1>הרשמה ליריד – חברי העמותה</h1>
@@ -56,8 +57,27 @@
             </div>
             <div class="field" data-label="עיר מגורים">
               <label class="label" for="city">עיר מגורים</label>
-              <input type="text" id="city" name="city" autocomplete="address-level2">
+              <input type="text" id="city" name="city" data-cities autocomplete="address-level2" placeholder="התחילו להקליד ובחרו מהרשימה">
+              <span class="error-msg">נא לבחור יישוב מהרשימה</span>
             </div>
+          </div>
+
+          <div class="field" data-label="התאמות נגישות נדרשות">
+            <span class="label">האם תזדקק/י להתאמות נגישות ביריד?</span>
+            <span class="hint">אפשר לסמן כמה תשובות – כדי שנוכל להיערך מראש</span>
+            <div class="choices">
+              <label class="chip"><input type="checkbox" name="accessibility" value="תרגום לשפת הסימנים"><span>תרגום לשפת הסימנים</span></label>
+              <label class="chip"><input type="checkbox" name="accessibility" value="תמלול / כתוביות בזמן אמת"><span>תמלול / כתוביות בזמן אמת</span></label>
+              <label class="chip"><input type="checkbox" name="accessibility" value="מערכת עזר לשמיעה"><span>מערכת עזר לשמיעה (לולאת השראה / אוזניות)</span></label>
+              <label class="chip"><input type="checkbox" name="accessibility" value="אזור שקט לשיחות"><span>אזור שקט לשיחות</span></label>
+              <label class="chip"><input type="checkbox" name="accessibility" value="נגישות לכיסא גלגלים"><span>נגישות לכיסא גלגלים</span></label>
+              <label class="chip"><input type="checkbox" name="accessibility" value="חניית נכים"><span>חניית נכים</span></label>
+              <label class="chip"><input type="checkbox" name="accessibility" value="מקום ישיבה ומנוחה"><span>מקום ישיבה ומנוחה</span></label>
+              <label class="chip"><input type="checkbox" name="accessibility" value="ליווי אישי"><span>ליווי אישי</span></label>
+              <label class="chip"><input type="checkbox" name="accessibility" value="אחר" data-show="accessibilityOther"><span>אחר</span></label>
+              <label class="chip"><input type="checkbox" name="accessibility" value="לא נדרש"><span>לא נדרש</span></label>
+            </div>
+            <input type="text" id="accessibilityOther" name="accessibilityOther" class="other-input" data-label="התאמות נגישות – אחר" placeholder="פרטו" aria-label="התאמות נגישות – אחר" hidden>
           </div>
         </section>
 
@@ -135,8 +155,62 @@
           </div>
 
           <div class="field" data-label="תחומים לעבודה / לימודים">
-            <label class="label" for="fieldsOfInterest">באילו תחומים היית רוצה לעבוד או ללמוד?</label>
-            <input type="text" id="fieldsOfInterest" name="fieldsOfInterest" placeholder="לדוגמה: הייטק, חינוך, עסק עצמאי, הנדסאות">
+            <label class="label" for="fieldsEntry">באילו תחומים היית רוצה לעבוד או ללמוד?</label>
+            <span class="hint" id="fieldsHint">בחרו מהאפשרויות הנפוצות, או התחילו להקליד ובחרו מהרשימה. אפשר לבחור כמה תחומים.</span>
+            <div class="tag-input" data-tags>
+              <div class="quick-picks" role="group" aria-label="תחומים נפוצים">
+                <button type="button" class="quick-pick" data-value="הייטק ופיתוח תוכנה" aria-pressed="false">הייטק</button>
+                <button type="button" class="quick-pick" data-value="מחשבים ומערכות מידע" aria-pressed="false">מחשבים</button>
+                <button type="button" class="quick-pick" data-value="חינוך והוראה" aria-pressed="false">חינוך</button>
+                <button type="button" class="quick-pick" data-value="הנדסה" aria-pressed="false">הנדסה</button>
+                <button type="button" class="quick-pick" data-value="אומנות" aria-pressed="false">אומנות</button>
+                <button type="button" class="quick-pick" data-value="משחק ותיאטרון" aria-pressed="false">משחק</button>
+                <button type="button" class="quick-pick" data-value="ניהול ומנהל עסקים" aria-pressed="false">ניהול ועסקים</button>
+                <button type="button" class="quick-pick" data-value="יזמות ועסק עצמאי" aria-pressed="false">עסק עצמאי</button>
+                <button type="button" class="quick-pick" data-value="רפואה ומקצועות הבריאות" aria-pressed="false">רפואה ובריאות</button>
+                <button type="button" class="quick-pick" data-value="ספורט וכושר" aria-pressed="false">ספורט</button>
+              </div>
+              <ul class="tag-list" aria-label="התחומים שנבחרו"></ul>
+              <div class="tag-entry">
+                <input type="text" id="fieldsEntry" list="fieldsSuggestions" autocomplete="off" aria-describedby="fieldsHint" placeholder="לדוגמה: סייבר, צילום, נדל״ן">
+                <button type="button" class="btn btn-ghost tag-add">הוספה</button>
+              </div>
+              <datalist id="fieldsSuggestions">
+                <option value="הייטק ופיתוח תוכנה"></option><option value="מחשבים ומערכות מידע"></option><option value="סייבר ואבטחת מידע"></option>
+                <option value="דאטה ובינה מלאכותית"></option><option value="בדיקות תוכנה (QA)"></option><option value="תמיכה טכנית ו-IT"></option>
+                <option value="ניהול מוצר"></option><option value="עיצוב חוויית משתמש (UX/UI)"></option>
+                <option value="הנדסה"></option><option value="הנדסת חשמל ואלקטרוניקה"></option><option value="הנדסת מכונות"></option>
+                <option value="הנדסה אזרחית ובניין"></option><option value="הנדסת תעשייה וניהול"></option><option value="הנדסאות"></option>
+                <option value="אדריכלות ועיצוב פנים"></option>
+                <option value="חינוך והוראה"></option><option value="חינוך מיוחד"></option><option value="גיל רך וגננות"></option>
+                <option value="הדרכה ואימון אישי"></option><option value="עבודה סוציאלית"></option><option value="פסיכולוגיה וטיפול רגשי"></option>
+                <option value="רפואה ומקצועות הבריאות"></option><option value="סיעוד"></option><option value="פיזיותרפיה וריפוי בעיסוק"></option>
+                <option value="רוקחות"></option><option value="רפואה משלימה"></option><option value="תזונה ודיאטה"></option>
+                <option value="מעבדה ומחקר"></option><option value="מדעים (פיזיקה, כימיה, ביולוגיה)"></option><option value="מתמטיקה וסטטיסטיקה"></option>
+                <option value="ספורט וכושר"></option>
+                <option value="אומנות"></option><option value="עיצוב גרפי"></option><option value="אנימציה ותלת-ממד"></option>
+                <option value="צילום ווידאו"></option><option value="משחק ותיאטרון"></option><option value="מוזיקה"></option>
+                <option value="קולנוע וטלוויזיה"></option><option value="כתיבה ועיתונאות"></option><option value="שפות ותרגום"></option>
+                <option value="שיווק ופרסום"></option><option value="מדיה דיגיטלית ורשתות חברתיות"></option><option value="מכירות"></option>
+                <option value="שירות לקוחות"></option><option value="ניהול ומנהל עסקים"></option><option value="יזמות ועסק עצמאי"></option>
+                <option value="ניהול פרויקטים"></option><option value="משאבי אנוש"></option><option value="אדמיניסטרציה ומזכירות"></option>
+                <option value="כלכלה וחשבונאות"></option><option value="בנקאות וביטוח"></option><option value="נדל״ן"></option>
+                <option value="משפטים"></option>
+                <option value="לוגיסטיקה ושרשרת אספקה"></option><option value="תחבורה ונהיגה מקצועית"></option><option value="תעופה"></option>
+                <option value="ביטחון ושמירה"></option><option value="כבאות והצלה"></option><option value="משטרה ואכיפה"></option>
+                <option value="שירות ציבורי וממשלה"></option>
+                <option value="תיירות ומלונאות"></option><option value="מסעדנות ובישול"></option><option value="אפייה וקונדיטוריה"></option>
+                <option value="קמעונאות ומסחר"></option><option value="אירועים והפקות"></option>
+                <option value="חקלאות"></option><option value="סביבה ואנרגיה"></option><option value="וטרינריה ובעלי חיים"></option>
+                <option value="חשמלאות"></option><option value="אינסטלציה ומיזוג אוויר"></option><option value="נגרות ומלאכות יד"></option>
+                <option value="מכונאות רכב"></option><option value="ייצור ותעשייה"></option><option value="בנייה ושיפוצים"></option>
+                <option value="אופנה וטקסטיל"></option><option value="קוסמטיקה וטיפוח"></option><option value="עיצוב שיער"></option>
+                <option value="עמותות ופעילות חברתית"></option><option value="דת ולימודי קודש"></option><option value="גיאוגרפיה ומיפוי (GIS)"></option>
+                <option value="עדיין לא יודע/ת"></option>
+              </datalist>
+              <input type="hidden" name="fieldsOfInterest">
+              <p class="visually-hidden tag-status" aria-live="polite"></p>
+            </div>
           </div>
         </section>
 
@@ -221,8 +295,8 @@
           <div class="field" data-label="העדפת מופע">
             <span class="label">איזה מופע היית מעדיף/ה?</span>
             <div class="choices">
-              <label class="chip"><input type="radio" name="showPreference" value="סטנדאפ"><span>🎤 סטנדאפ</span></label>
-              <label class="chip"><input type="radio" name="showPreference" value="זמר/ת"><span>🎶 זמר/ת</span></label>
+              <label class="chip"><input type="radio" name="showPreference" value="סטנדאפ"><span><span aria-hidden="true">🎤</span> סטנדאפ</span></label>
+              <label class="chip"><input type="radio" name="showPreference" value="זמר/ת"><span><span aria-hidden="true">🎶</span> זמר/ת</span></label>
               <label class="chip"><input type="radio" name="showPreference" value="לא משנה לי"><span>לא משנה לי</span></label>
             </div>
           </div>
@@ -239,6 +313,11 @@
         </section>
 
         <p class="privacy-note">המידע ישמש את עמותת בלב אחד לתכנון היריד בלבד.</p>
+
+        <p class="help-note">
+          <span>שאלות על ההרשמה? אפשר לקבל מענה <b>בהודעות טקסט</b>, בלי צורך בשיחת טלפון.</span>
+          <a class="btn btn-wa" href="https://wa.me/972503478599?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A4%D7%95%D7%A0%D7%94%20%D7%91%D7%A0%D7%95%D7%92%D7%A2%20%D7%9C%D7%99%D7%A8%D7%99%D7%93%20%D7%94%D7%AA%D7%A2%D7%A1%D7%95%D7%A7%D7%94%20%D7%95%D7%94%D7%9C%D7%99%D7%9E%D7%95%D7%93%D7%99%D7%9D%20%D7%A9%D7%9C%20%D7%91%D7%9C%D7%91%20%D7%90%D7%97%D7%93" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3.5 20.5l1.3-4A8.5 8.5 0 1 1 8 19.3z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M9.2 7.9c.2-.3.4-.4.7-.4h.5c.2 0 .4.1.5.4l.7 1.7c.1.2 0 .5-.1.7l-.6.7c.6 1.2 1.6 2.2 2.8 2.8l.7-.6c.2-.2.5-.2.7-.1l1.7.7c.3.1.4.3.4.5v.5c0 .3-.1.5-.4.7-.7.5-1.8.6-3.3-.1a8.6 8.6 0 0 1-3.9-3.9c-.7-1.5-.6-2.6-.1-3.3z" fill="currentColor"/></svg> כתבו לנו בוואטסאפ<span class="visually-hidden"> (נפתח בחלון חדש)</span></a>
+        </p>
 
         <div class="submit-row">
           <p class="form-error" role="alert"></p>
@@ -258,9 +337,14 @@
   </main>
 
   <footer class="site-footer">
+    <div class="footer-links">
+      <a href="https://wa.me/972503478599?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A0%D7%99%20%D7%A4%D7%95%D7%A0%D7%94%20%D7%91%D7%A0%D7%95%D7%92%D7%A2%20%D7%9C%D7%99%D7%A8%D7%99%D7%93%20%D7%94%D7%AA%D7%A2%D7%A1%D7%95%D7%A7%D7%94%20%D7%95%D7%94%D7%9C%D7%99%D7%9E%D7%95%D7%93%D7%99%D7%9D%20%D7%A9%D7%9C%20%D7%91%D7%9C%D7%91%20%D7%90%D7%97%D7%93" target="_blank" rel="noopener">שאלות? כתבו לנו בוואטסאפ<span class="visually-hidden"> (נפתח בחלון חדש)</span></a>
+      <a href="accessibility.html">הצהרת נגישות</a>
+    </div>
     <p>בהפקת מיכל קלינבוים, עודד כהן ונירית שוקר כחלק מפרויקט גמר בקורס הפקת אירועים בהנחייתו של אודי שחר, מכללת רמת גן.</p>
   </footer>
 
+  <script src="cities.js"></script>
   <script src="forms.js"></script>
   <script>
     BelevForms.init({ form: '#members-form', formName: 'members-registration', netlify: false });

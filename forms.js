@@ -66,18 +66,124 @@
       }));
     });
 
+    /* ---------- screen-reader structure ---------- */
+    // The red * is visual only – the inputs already carry `required`.
+    form.querySelectorAll('.req').forEach(r => r.setAttribute('aria-hidden', 'true'));
+    // Name every group of radio buttons / checkboxes after its question (WCAG 1.3.1).
+    form.querySelectorAll('.field').forEach((f, i) => {
+      const choices = f.querySelector('.choices, .type-cards');
+      const label = f.querySelector(':scope > .label, :scope > .yn-row > .label');
+      if (!choices || !label || !choices.querySelector('input[type=radio], input[type=checkbox]')) return;
+      if (!choices.hasAttribute('aria-label') && !choices.hasAttribute('aria-labelledby')) {
+        label.id = label.id || `${opts.formName}-q${i}`;
+        choices.setAttribute('aria-labelledby', label.id);
+      }
+      const radios = choices.querySelector('input[type=radio]');
+      choices.setAttribute('role', radios ? 'radiogroup' : 'group');
+      if (radios && radios.required) choices.setAttribute('aria-required', 'true');
+      // aria-required isn't allowed on checkbox groups, so say it in the group's name instead
+      if (f.hasAttribute('data-required-group') && !label.querySelector('.sr-required')) {
+        label.insertAdjacentHTML('beforeend', '<span class="visually-hidden sr-required"> (שדה חובה)</span>');
+      }
+    });
+    form.querySelectorAll('.error-msg').forEach((m, i) => { m.id = m.id || `${opts.formName}-err${i}`; });
+
+    /* ---------- city fields: official list of Israeli localities ---------- */
+    const norm = s => String(s).replace(/[-–־"״'׳().,]/g, ' ').replace(/קריית/g, 'קרית').replace(/\s+/g, ' ').trim();
+    const cityInputs = form.querySelectorAll('input[data-cities]');
+    if (cityInputs.length && window.IL_LOCALITIES) {
+      let dl = document.getElementById('il-localities');
+      if (!dl) {
+        dl = document.createElement('datalist');
+        dl.id = 'il-localities';
+        window.IL_LOCALITIES.forEach(n => { const o = document.createElement('option'); o.value = n; dl.appendChild(o); });
+        document.body.appendChild(dl);
+      }
+      const index = new Map();
+      window.IL_LOCALITIES.forEach(n => {
+        index.set(norm(n), n);
+        const short = n.split(' - ')[0];            // "תל אביב" → "תל אביב - יפו"
+        if (short !== n && !index.has(norm(short))) index.set(norm(short), n);
+      });
+      cityInputs.forEach(inp => {
+        inp.setAttribute('list', 'il-localities');
+        inp.checkCity = () => {
+          const v = inp.value.trim();
+          if (!v) { inp.setCustomValidity(''); return; }
+          const match = index.get(norm(v));
+          if (match) { if (inp.value !== match) inp.value = match; inp.setCustomValidity(''); }
+          else inp.setCustomValidity('נא לבחור יישוב מהרשימה');
+        };
+        inp.addEventListener('change', inp.checkCity);
+        inp.addEventListener('blur', inp.checkCity);
+      });
+    }
+
+    /* ---------- tag pickers (choose several, with quick picks + autocomplete) ---------- */
+    form.querySelectorAll('[data-tags]').forEach(box => {
+      const hidden = box.querySelector('input[type=hidden]');
+      const entry = box.querySelector('.tag-entry input');
+      const list = box.querySelector('.tag-list');
+      const status = box.querySelector('.tag-status');
+      const options = [...box.querySelectorAll('datalist option')].map(o => o.value);
+      const tags = [];
+      const sync = () => {
+        hidden.value = tags.join(', ');
+        list.innerHTML = '';
+        tags.forEach(t => {
+          const li = document.createElement('li');
+          const txt = document.createElement('span'); txt.textContent = t;
+          const rm = document.createElement('button');
+          rm.type = 'button'; rm.className = 'tag-remove';
+          rm.setAttribute('aria-label', 'הסרת ' + t);
+          rm.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+          rm.addEventListener('click', () => { remove(t); entry.focus(); });
+          li.append(txt, rm);
+          list.appendChild(li);
+        });
+        box.querySelectorAll('.quick-pick').forEach(b => b.setAttribute('aria-pressed', String(tags.includes(b.dataset.value))));
+      };
+      const add = raw => {
+        const t = String(raw).trim().replace(/\s+/g, ' ');
+        if (!t) return;
+        if (!tags.includes(t)) { tags.push(t); status.textContent = 'נוסף: ' + t; }
+        sync();
+      };
+      const remove = t => { const i = tags.indexOf(t); if (i > -1) { tags.splice(i, 1); status.textContent = 'הוסר: ' + t; sync(); } };
+      box.flush = () => { if (entry.value.trim()) { add(entry.value); entry.value = ''; } };
+      box.querySelectorAll('.quick-pick').forEach(b => b.addEventListener('click', () => (tags.includes(b.dataset.value) ? remove : add)(b.dataset.value)));
+      box.querySelector('.tag-add').addEventListener('click', () => { box.flush(); entry.focus(); });
+      entry.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); box.flush(); } });
+      // picking a suggestion from the list adds it straight away
+      entry.addEventListener('input', () => { if (options.includes(entry.value)) { add(entry.value); entry.value = ''; } });
+      sync();
+    });
+
     /* ---------- validation ---------- */
     function fieldOk(el) {
       if (el.type === 'radio') return !el.required || !!form.querySelector(`input[name="${el.name}"]:checked:not(:disabled)`);
+      if (el.checkCity) el.checkCity();
       return el.checkValidity();
+    }
+    // Mark / unmark a question: red outline + aria-invalid + the error text read by screen readers
+    function setInvalid(field, bad) {
+      field.classList.toggle('invalid', bad);
+      const msg = field.querySelector('.error-msg');
+      field.querySelectorAll('input:not([type=hidden]), select, textarea').forEach(el => {
+        if (bad) el.setAttribute('aria-invalid', 'true'); else el.removeAttribute('aria-invalid');
+        if (!msg) return;
+        const ids = (el.getAttribute('aria-describedby') || '').split(' ').filter(x => x && x !== msg.id);
+        if (bad) ids.push(msg.id);
+        if (ids.length) el.setAttribute('aria-describedby', ids.join(' ')); else el.removeAttribute('aria-describedby');
+      });
     }
     function validate() {
       let firstBad = null;
       const mark = (el, field) => {
-        field.classList.add('invalid');
+        setInvalid(field, true);
         if (!firstBad) firstBad = el;
       };
-      form.querySelectorAll('.field').forEach(f => f.classList.remove('invalid'));
+      form.querySelectorAll('.field.invalid').forEach(f => setInvalid(f, false));
       form.querySelectorAll('input, select, textarea').forEach(el => {
         if (el.disabled || el.type === 'hidden' || !el.name) return;
         if (el.type !== 'radio' && el.type !== 'checkbox' && typeof el.value === 'string') el.value = el.value.trim();
@@ -91,9 +197,9 @@
     function clearIfFixed(e) {
       const f = e.target.closest('.field');
       if (!f || !f.classList.contains('invalid')) return;
-      const stillBad = [...f.querySelectorAll('input, select, textarea')].some(el => !el.disabled && el.name && !fieldOk(el))
+      const stillBad = [...f.querySelectorAll('input, select, textarea')].some(el => !el.disabled && el.name && el.type !== 'hidden' && !fieldOk(el))
         || (f.hasAttribute('data-required-group') && !f.querySelector('input[type=checkbox]:checked'));
-      if (!stillBad) f.classList.remove('invalid');
+      if (!stillBad) setInvalid(f, false);
     }
     form.addEventListener('input', clearIfFixed);
     form.addEventListener('change', clearIfFixed);
@@ -149,6 +255,7 @@
 
     form.addEventListener('submit', async e => {
       e.preventDefault();
+      form.querySelectorAll('[data-tags]').forEach(b => b.flush()); // text typed but not yet added
       if (opts.beforeSubmit) opts.beforeSubmit(form);
       const firstBad = validate();
       if (firstBad) return showError(MSG_INVALID, firstBad);
